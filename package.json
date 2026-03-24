@@ -1,0 +1,12 @@
+{
+  "name": "principl-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "bun server.ts",
+    "dev": "bun --watch server.ts"
+  },
+  "dependencies": {
+    "resend": "^6.9.3"
+  }
+}
