@@ -1,6 +1,11 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+if (process.env.RESEND_API_KEY) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+} else {
+  console.warn("[notify] RESEND_API_KEY not set, email notifications disabled");
+}
 
 export interface NotifyPayload {
   name: string;
@@ -10,6 +15,7 @@ export interface NotifyPayload {
 }
 
 export async function notifyNewApplication(app: NotifyPayload): Promise<void> {
+  if (!resend) return;
   try {
     await resend.emails.send({
       from: "principl.ai <notifications@principl.ai>",
