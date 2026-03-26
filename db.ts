@@ -1,23 +1,19 @@
-import { Database } from "bun:sqlite";
+import postgres from "postgres";
 
-const DB_PATH = process.env.DB_PATH ?? "./principl.db";
+const sql = postgres(process.env.DATABASE_URL!, { max: 5 });
 
-let db: Database;
-
-export function initDb(): void {
-  db = new Database(DB_PATH);
-  db.run("PRAGMA journal_mode = WAL");
-  db.run(`
+export async function initDb(): Promise<void> {
+  await sql`
     CREATE TABLE IF NOT EXISTS applications (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
       revenue TEXT NOT NULL,
       fix_first TEXT NOT NULL,
-      created_at TEXT NOT NULL DEFAULT (datetime('now')),
-      updated_at TEXT
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      updated_at TIMESTAMPTZ
     )
-  `);
+  `;
 }
 
 export interface Application {
@@ -31,22 +27,16 @@ export interface UpsertResult {
   isNew: boolean;
 }
 
-export function upsertApplication(app: Application): UpsertResult {
-  const existing = db
-    .query("SELECT id FROM applications WHERE email = ?")
-    .get(app.email);
-
-  if (existing) {
-    db.run(
-      `UPDATE applications SET name = ?, revenue = ?, fix_first = ?, updated_at = datetime('now') WHERE email = ?`,
-      [app.name, app.revenue, app.fix_first, app.email]
-    );
-    return { isNew: false };
-  }
-
-  db.run(
-    `INSERT INTO applications (name, email, revenue, fix_first) VALUES (?, ?, ?, ?)`,
-    [app.name, app.email, app.revenue, app.fix_first]
-  );
-  return { isNew: true };
+export async function upsertApplication(app: Application): Promise<UpsertResult> {
+  const result = await sql`
+    INSERT INTO applications (name, email, revenue, fix_first)
+    VALUES (${app.name}, ${app.email}, ${app.revenue}, ${app.fix_first})
+    ON CONFLICT (email) DO UPDATE SET
+      name = EXCLUDED.name,
+      revenue = EXCLUDED.revenue,
+      fix_first = EXCLUDED.fix_first,
+      updated_at = now()
+    RETURNING (xmax = 0) AS is_new
+  `;
+  return { isNew: result[0].is_new };
 }

@@ -1,7 +1,7 @@
 import { initDb, upsertApplication, type Application } from "./db.ts";
 import { notifyNewApplication } from "./notify.ts";
 
-initDb();
+await initDb();
 
 const REQUIRED_FIELDS = ["name", "email", "revenue", "fix_first"] as const;
 
@@ -38,7 +38,7 @@ async function handleApply(req: Request): Promise<Response> {
   };
 
   try {
-    const { isNew } = upsertApplication(app);
+    const { isNew } = await upsertApplication(app);
     if (isNew) {
       notifyNewApplication(app);
     }
