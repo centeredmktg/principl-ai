@@ -1,7 +1,8 @@
 import { initDb, upsertApplication, type Application } from "./db.ts";
 import { notifyNewApplication } from "./notify.ts";
 
-await initDb();
+// Init DB in background — don't block server startup (Railway healthcheck needs /health immediately)
+initDb().catch((err) => console.error("[server] DB init failed, will retry on first request:", err));
 
 const REQUIRED_FIELDS = ["name", "email", "revenue", "fix_first"] as const;
 
@@ -38,6 +39,7 @@ async function handleApply(req: Request): Promise<Response> {
   };
 
   try {
+    await initDb();
     const { isNew } = await upsertApplication(app);
     if (isNew) {
       notifyNewApplication(app);

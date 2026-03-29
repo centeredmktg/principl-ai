@@ -1,8 +1,11 @@
 import postgres from "postgres";
 
-const sql = postgres(process.env.DATABASE_URL!, { max: 5 });
+const sql = postgres(process.env.DATABASE_URL ?? "", { max: 5 });
+
+let dbReady = false;
 
 export async function initDb(): Promise<void> {
+  if (dbReady) return;
   await sql`
     CREATE TABLE IF NOT EXISTS applications (
       id SERIAL PRIMARY KEY,
@@ -14,6 +17,7 @@ export async function initDb(): Promise<void> {
       updated_at TIMESTAMPTZ
     )
   `;
+  dbReady = true;
 }
 
 export interface Application {
