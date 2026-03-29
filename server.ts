@@ -70,6 +70,12 @@ const server = Bun.serve({
       });
     }
 
+    if (path === "/headshot.jpg" && req.method === "GET") {
+      return new Response(Bun.file(new URL("./headshot.jpg", import.meta.url).pathname), {
+        headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=86400" },
+      });
+    }
+
     if (path === "/apply" && req.method === "POST") {
       return handleApply(req);
     }
