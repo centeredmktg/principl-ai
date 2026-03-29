@@ -4,133 +4,454 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>principl.ai — Revenue Residency</title>
+  <meta name="description" content="Revenue Residency: a 6-week program for founder-operators ready to build the system underneath their revenue. Cohort 1 opens Q2 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --green: #226b03;
+      --green-light: #2a8204;
+      --ink: #111;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --surface: #fdfcfa;
+      --surface-warm: #f6f4f0;
+      --border: #e2dfda;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', -apple-system, sans-serif;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
-      background-color: #fafaf9;
-      color: #1a1a1a;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 17px;
-      line-height: 1.7;
-      padding: 48px 24px 80px;
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .container {
-      max-width: 640px;
+    body {
+      background-color: var(--surface);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Subtle paper grain */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: 9999;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .wordmark {
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      color: #888;
-      margin-bottom: 64px;
-      font-weight: 500;
-    }
-
-    .section {
-      margin-bottom: 56px;
-    }
-
-    h2 {
-      font-size: 13px;
+      font-family: var(--sans);
+      font-size: 15px;
       font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      position: relative;
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .header-rule {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #aaa;
-      margin-bottom: 20px;
+      color: var(--text-secondary);
     }
 
-    p {
-      margin-bottom: 16px;
-      color: #1a1a1a;
+    /* ─── Hero ─── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 32px 100px;
+      position: relative;
     }
 
-    p:last-child {
+    .hero-label {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-body {
+      max-width: 580px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-body p {
+      margin-bottom: 18px;
+      color: var(--text);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-body p:last-child {
       margin-bottom: 0;
     }
 
-    .lede {
-      font-size: 22px;
+    .hero-body p strong {
       font-weight: 500;
-      line-height: 1.45;
-      margin-bottom: 28px;
-      color: #1a1a1a;
+      color: var(--ink);
     }
 
-    .divider {
-      border: none;
-      height: 1px;
-      background-color: #e8e6e3;
-      margin: 56px 0;
+    /* ─── Section rhythm ─── */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+      position: relative;
     }
 
-    .form-section-header {
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 32px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 1.5px;
+      background: var(--green);
+    }
+
+    .section-content {
+      max-width: 600px;
+    }
+
+    .section-content p {
+      margin-bottom: 18px;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-content p strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ─── Breakout quote ─── */
+    .breakout {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 34px);
+      line-height: 1.4;
+      color: var(--ink);
+      padding: 60px 0;
+      max-width: 680px;
+      margin: 0 auto;
+      border-top: 1.5px solid var(--border);
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 100px;
+      position: relative;
+    }
+
+    .breakout-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .breakout em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    /* ─── Program details ─── */
+    .program-details {
+      background: var(--surface-warm);
+      padding: 80px 32px;
+      margin-bottom: 100px;
+    }
+
+    .program-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .program-stat {
+      border-left: 1.5px solid var(--green);
+      padding-left: 20px;
+    }
+
+    .program-stat .number {
+      font-family: var(--serif);
+      font-size: 32px;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .program-stat .label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ─── Credentials ─── */
+    .credentials-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .credentials-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 300;
+      font-size: 16px;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .credentials-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+
+    .credentials-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* ─── Application form ─── */
+    .apply-section {
+      background: var(--ink);
+      color: #fff;
+      padding: 100px 32px;
+    }
+
+    .apply-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .apply-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-light);
       margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .apply-label::before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 1.5px;
+      background: var(--green-light);
+    }
+
+    .apply-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .apply-section .apply-intro {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 48px;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    .form-field {
+      position: relative;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
     }
 
     input[type="text"],
     input[type="email"],
     textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 14px 0;
       font-size: 16px;
-      font-family: inherit;
+      font-family: var(--sans);
+      font-weight: 300;
       line-height: 1.5;
-      color: #1a1a1a;
-      background-color: #fff;
-      border: 1px solid #d4d2cf;
-      border-radius: 4px;
+      color: #fff;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0;
       appearance: none;
       -webkit-appearance: none;
-      transition: border-color 0.15s ease;
+      transition: border-color 0.3s ease;
       outline: none;
     }
 
     input[type="text"]:focus,
     input[type="email"]:focus,
     textarea:focus {
-      border-color: #1a1a1a;
+      border-bottom-color: var(--green-light);
     }
 
     input::placeholder,
     textarea::placeholder {
-      color: #aaa;
+      color: rgba(255,255,255,0.25);
     }
 
     textarea {
       resize: vertical;
-      min-height: 110px;
+      min-height: 100px;
     }
 
     button[type="submit"] {
       width: 100%;
-      padding: 14px 20px;
-      font-size: 16px;
-      font-family: inherit;
+      padding: 18px 24px;
+      font-size: 14px;
+      font-family: var(--sans);
       font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: #fff;
-      background-color: #1a1a1a;
+      background-color: var(--green);
       border: none;
-      border-radius: 4px;
+      border-radius: 0;
       cursor: pointer;
-      transition: opacity 0.15s ease;
-      margin-top: 4px;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button[type="submit"]::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.5s ease;
     }
 
     button[type="submit"]:hover {
-      opacity: 0.85;
+      background-color: var(--green-light);
+    }
+
+    button[type="submit"]:hover::after {
+      left: 100%;
     }
 
     button[type="submit"]:disabled {
@@ -140,103 +461,215 @@
 
     #confirmation {
       padding: 20px 0;
-      color: #1a1a1a;
     }
 
     #confirmation p {
       font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 300;
     }
 
-    .footer-note {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #999;
+    .apply-footnote {
+      margin-top: 32px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 300;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-left {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .header { padding: 28px 24px; }
+      .header-rule { display: none; }
+      .hero { padding: 60px 24px 80px; }
+      .section { padding: 0 24px 80px; }
+      .breakout-inner { padding: 0 24px; }
+      .breakout { margin-bottom: 80px; }
+
+      .program-details { padding: 60px 24px; margin-bottom: 80px; }
+      .program-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .apply-section { padding: 80px 24px; }
+      .footer { padding: 32px 24px; flex-direction: column; gap: 8px; }
     }
 
     @media (max-width: 480px) {
-      body {
-        font-size: 16px;
-        padding: 36px 20px 64px;
-      }
-
-      .lede {
-        font-size: 20px;
-      }
-
-      .wordmark {
-        margin-bottom: 48px;
-      }
+      body { font-size: 16px; }
+      .hero { padding: 48px 20px 64px; }
+      .hero h1 { margin-bottom: 28px; }
+      .hero-body p { font-size: 16px; }
+      .section { padding: 0 20px 64px; }
+      .section-content p { font-size: 16px; }
+      .breakout-inner { padding: 0 20px; }
+      .program-details { padding: 48px 20px; }
+      .apply-section { padding: 64px 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <div class="wordmark">principl.ai</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="wordmark">principl</div>
+    <div class="header-rule">Revenue Residency — Cohort 1</div>
+  </header>
 
-    <!-- Section 1: The Problem -->
-    <div class="section">
-      <p class="lede">You're not stuck. You're running on momentum.</p>
-      <p>Revenue is coming in. Customers are happy. Something's working, you're just not sure what.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">For founder-operators at $300K–$3M</div>
+    <h1>You're not stuck. You're running on <em>momentum.</em></h1>
+    <div class="hero-body">
+      <p>Revenue is coming in. Customers are happy. Something's working — you're just not sure what.</p>
       <p>So you do more of everything. More outreach. More content. More offers. More meetings.</p>
-      <p>And it works. Until it doesn't.</p>
-      <p>The problem isn't effort. You're running a business without a revenue system. You have traction, not infrastructure. And at some point, usually right when you're trying to grow, the difference starts to matter.</p>
+      <p><strong>And it works. Until it doesn't.</strong></p>
+      <p>The problem isn't effort. You're running a business without a revenue system. You have traction, not infrastructure. And at some point — usually right when you're trying to grow — the difference starts to matter.</p>
       <p>You can feel it. You just can't name it yet.</p>
     </div>
+  </section>
 
-    <div class="divider"></div>
+  <!-- Breakout -->
+  <div class="breakout">
+    <div class="breakout-inner reveal">
+      It's not a sales problem. It's a <em>systems</em> problem.
+    </div>
+  </div>
 
-    <!-- Section 2: The Diagnosis -->
-    <div class="section">
-      <h2>What's actually happening</h2>
+  <!-- Diagnosis -->
+  <section class="section reveal">
+    <div class="section-label">What's actually happening</div>
+    <div class="section-content">
       <p>Most founder-led businesses are built on relationships, hustle, and a few things that worked early. That's not a knock. It's how most good businesses start.</p>
       <p>But somewhere between $300K and $3M, the math changes. What got you here won't scale. The referrals get lumpy. The pipeline gets unpredictable. The close rate feels random.</p>
-      <p>It's not random. You just don't have visibility into why you win when you win, and why you lose when you lose.</p>
+      <p><strong>It's not random.</strong> You just don't have visibility into why you win when you win, and why you lose when you lose.</p>
       <p>That's a systems problem, not a sales problem.</p>
     </div>
+  </section>
 
-    <div class="divider"></div>
-
-    <!-- Section 3: The Program -->
-    <div class="section">
-      <h2>Revenue Residency</h2>
+  <!-- The Program -->
+  <section class="section reveal">
+    <div class="section-label">Revenue Residency</div>
+    <div class="section-content">
       <p>Revenue Residency is a 6-week program for founder-operators who are ready to build the system underneath their revenue.</p>
       <p>Not a course. Not a mastermind. Not consulting where someone does it for you.</p>
-      <p>You build your own Revenue OS, week by week, with a small cohort of founders at the same stage. The work you do inside the program is the deliverable. You leave with something you built, understand, and can actually run.</p>
-      <p>No more than 8 founders. Six weeks. One system you'll actually use.</p>
-      <p>Cohort 1 opens Q2 2026. $8,000 (future cohorts will be $10,000).</p>
-      <p>If this is the year you stop guessing and start building, this is the room.</p>
+      <p>You build your own Revenue OS — week by week — with a small cohort of founders at the same stage. The work you do inside the program is the deliverable. You leave with something you built, understand, and can actually run.</p>
     </div>
+  </section>
 
-    <div class="divider"></div>
-
-    <!-- Section 4: Why Me -->
-    <div class="section">
-      <h2>Who built this</h2>
-      <p>I'm not a consultant who figured this out in a boardroom.</p>
-      <p>I've built a solar sales org from $0 to $3M, a solar installation business to over $1M in year one, and a full-stack marketing agency to $1M in 14 months with 9 full-time employees. I've worked on Super Bowl campaigns. I've been working in AI and machine learning since 2017. I teach revenue strategy at an R1 university's college of business and I'm still an MBA student, which means I'm in the room learning alongside practitioners.</p>
-      <p>I've also had to walk away from a $30M project I built from scratch with nothing to show but an expensive lesson in the importance of maintaining independent counsel.</p>
-      <p>I've made most of the mistakes the founders I work with are making right now.</p>
-      <p>I built this methodology because I needed it. I've run it on myself first. The DSCR automation lab at dscrme.com is live proof the system works without a team or a budget, just clear infrastructure and the right tools.</p>
-      <p>I'm not here to tell you what worked for me and call it a framework. I'm here to help you build the version that works for you.</p>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Section 5: Application Close + Form -->
-    <div class="section">
-      <div class="form-section-header">
-        <h2>Apply for Cohort 1</h2>
-        <p>If you're a founder-operator between $300K and $3M and you know something in your revenue motion is broken but you can't put your finger on what, this cohort is for you.</p>
-        <p>No more than 8 founders. Six weeks. One system you'll actually use.</p>
-        <p>Cohort 1 opens Q2 2026 at $8,000. Future cohorts will be $10,000. There are no tricks here. Just limited spots and a price that goes up once we have proof.</p>
+  <!-- Program Stats -->
+  <div class="program-details reveal">
+    <div class="program-inner">
+      <div class="section-label">The details</div>
+      <div class="program-grid">
+        <div class="program-stat">
+          <div class="number">8</div>
+          <div class="label">founders per cohort, maximum</div>
+        </div>
+        <div class="program-stat">
+          <div class="number">6 weeks</div>
+          <div class="label">of building — not lectures</div>
+        </div>
+        <div class="program-stat">
+          <div class="number">$8,000</div>
+          <div class="label">Cohort 1 price — future cohorts $10K</div>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Who Built This -->
+  <section class="section reveal">
+    <div class="section-label">Who built this</div>
+    <div class="section-content">
+      <p>I'm not a consultant who figured this out in a boardroom.</p>
+      <ul class="credentials-list">
+        <li>Built a solar sales org from $0 to $3M</li>
+        <li>Solar installation business to $1M+ in year one</li>
+        <li>Marketing agency to $1M in 14 months, 9 FTEs</li>
+        <li>DTC brand from $100K to $1.2M</li>
+        <li>Revenue strategy professor at an R1 university</li>
+        <li>MBA student — still in the room learning alongside practitioners</li>
+        <li>Working in AI and machine learning since 2017</li>
+      </ul>
+      <p style="margin-top: 28px;">I've also had to walk away from a $30M project I built from scratch with nothing to show but an expensive lesson in the importance of maintaining independent counsel.</p>
+      <p>I've made most of the mistakes the founders I work with are making right now.</p>
+      <p>I built this methodology because I needed it. I've run it on myself first. The DSCR automation lab at dscrme.com is live proof the system works without a team or a budget — just clear infrastructure and the right tools.</p>
+      <p><strong>I'm not here to tell you what worked for me and call it a framework. I'm here to help you build the version that works for you.</strong></p>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="apply-section">
+    <div class="apply-inner reveal">
+      <div class="apply-label">Apply for Cohort 1</div>
+      <h2>If something in your revenue motion is broken — and you can't quite name it — this is the room.</h2>
+      <p class="apply-intro">No more than 8 founders. Six weeks. One system you'll actually use. Cohort 1 opens Q2 2026.</p>
 
       <form id="apply-form">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="revenue" placeholder="Current annual revenue (approximate)" required>
-        <textarea name="fix_first" placeholder="What's the one thing in your business you'd fix first if you knew exactly how?" rows="4" required></textarea>
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-field">
+          <label for="revenue">Revenue</label>
+          <input type="text" id="revenue" name="revenue" placeholder="Current annual revenue (approximate)" required>
+        </div>
+        <div class="form-field">
+          <label for="fix_first">The question that matters</label>
+          <textarea id="fix_first" name="fix_first" placeholder="What's the one thing in your business you'd fix first if you knew exactly how?" rows="4" required></textarea>
+        </div>
         <button type="submit">Apply for Cohort 1</button>
       </form>
 
@@ -244,12 +677,30 @@
         <p>Got it. We'll follow up within a few days. If it's a fit, we'll talk. If it's not, we'll tell you that too.</p>
       </div>
 
-      <p class="footer-note">We'll follow up within a few days. If it's a fit, we'll talk. If it's not, we'll tell you that too.</p>
+      <p class="apply-footnote">We'll follow up within a few days. If it's a fit, we'll talk. If it's not, we'll tell you that too.</p>
     </div>
+  </section>
 
-  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">principl.ai</div>
+    <div class="footer-right">danny@principl.ai</div>
+  </footer>
 
   <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Form submission
     document.getElementById('apply-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
@@ -274,6 +725,7 @@
         const json = await res.json();
         if (json.ok) {
           form.style.display = 'none';
+          document.querySelector('.apply-footnote').style.display = 'none';
           document.getElementById('confirmation').style.display = 'block';
         } else {
           btn.disabled = false;
