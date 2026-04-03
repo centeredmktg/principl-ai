@@ -51,8 +51,12 @@ async function handleApply(req: Request): Promise<Response> {
   }
 }
 
-const indexHtml = await Bun.file(
-  new URL("./index.html", import.meta.url).pathname
+const homepageHtml = await Bun.file(
+  new URL("./homepage.html", import.meta.url).pathname
+).text();
+
+const revenueResidencyHtml = await Bun.file(
+  new URL("./revenue-residency.html", import.meta.url).pathname
 ).text();
 
 const server = Bun.serve({
@@ -65,7 +69,13 @@ const server = Bun.serve({
     if (path === "/health") return new Response("ok");
 
     if (path === "/" && req.method === "GET") {
-      return new Response(indexHtml, {
+      return new Response(homepageHtml, {
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
+    }
+
+    if (path === "/revenue-residency" && req.method === "GET") {
+      return new Response(revenueResidencyHtml, {
         headers: { "Content-Type": "text/html; charset=utf-8" },
       });
     }
