@@ -1,1 +1,622 @@
-<!DOCTYPE html><html><body><h1>Homepage placeholder</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>principl.ai — Digital Transformation & AI Advisory</title>
+  <meta name="description" content="Principl helps organizations move from AI experimentation to infrastructure. First-principles methodology, not vendor recommendations. Led by Danny Cox.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #226b03;
+      --green-light: #2a8204;
+      --ink: #111;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --surface: #fdfcfa;
+      --surface-warm: #f6f4f0;
+      --border: #e2dfda;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--surface);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* Subtle paper grain */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: 9999;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .wordmark {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      position: relative;
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .header-rule {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 32px 100px;
+      position: relative;
+    }
+
+    .hero-label {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-body {
+      max-width: 580px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-body p {
+      margin-bottom: 18px;
+      color: var(--text);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .hero-body p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .hero-body p strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ─── CTA Button ─── */
+    .cta-button {
+      display: inline-block;
+      padding: 18px 40px;
+      font-size: 14px;
+      font-family: var(--sans);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: var(--green);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .cta-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover {
+      background-color: var(--green-light);
+    }
+
+    .cta-button:hover::after {
+      left: 100%;
+    }
+
+    /* ─── Section rhythm ─── */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px 100px;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 32px;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 1.5px;
+      background: var(--green);
+    }
+
+    .section-content {
+      max-width: 600px;
+    }
+
+    .section-content p {
+      margin-bottom: 18px;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .section-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-content p strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ─── Breakout quote ─── */
+    .breakout {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 34px);
+      line-height: 1.4;
+      color: var(--ink);
+      padding: 60px 0;
+      max-width: 680px;
+      margin: 0 auto;
+      border-top: 1.5px solid var(--border);
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 100px;
+      position: relative;
+    }
+
+    .breakout-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .breakout em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    /* ─── Beats (credential narrative) ─── */
+    .beat {
+      margin-bottom: 40px;
+    }
+
+    .beat:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .beat-label {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .beat p {
+      margin-bottom: 18px;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .beat p:last-child {
+      margin-bottom: 0;
+    }
+
+    .beat p strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .through-line {
+      border-top: 1.5px solid var(--border);
+      padding-top: 32px;
+      margin-top: 48px;
+    }
+
+    .through-line p {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.5vw, 24px);
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .through-line p em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    /* ─── CTA Section (dark) ─── */
+    .cta-section {
+      background: var(--ink);
+      color: #fff;
+      padding: 100px 32px;
+    }
+
+    .cta-section-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-section .section-label-dark {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-section .section-label-dark::before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 1.5px;
+      background: var(--green-light);
+    }
+
+    .cta-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-button-dark {
+      display: inline-block;
+      padding: 18px 40px;
+      font-size: 14px;
+      font-family: var(--sans);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: var(--green);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button-dark::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button-dark:hover {
+      background-color: var(--green-light);
+    }
+
+    .cta-button-dark:hover::after {
+      left: 100%;
+    }
+
+    .cta-footnote {
+      margin-top: 32px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+    }
+
+    .cta-footnote a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .cta-footnote a:hover {
+      color: #fff;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      padding: 40px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-left {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .footer-right a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-right a:hover {
+      color: var(--green);
+    }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .header { padding: 28px 24px; }
+      .header-rule { display: none; }
+      .hero { padding: 60px 24px 80px; }
+      .section { padding: 0 24px 80px; }
+      .breakout-inner { padding: 0 24px; }
+      .breakout { margin-bottom: 80px; }
+      .cta-section { padding: 80px 24px; }
+      .footer { padding: 32px 24px; flex-direction: column; gap: 8px; }
+    }
+
+    @media (max-width: 480px) {
+      body { font-size: 16px; }
+      .hero { padding: 48px 20px 64px; }
+      .hero h1 { margin-bottom: 28px; }
+      .hero-body p { font-size: 16px; }
+      .section { padding: 0 20px 64px; }
+      .section-content p { font-size: 16px; }
+      .breakout-inner { padding: 0 20px; }
+      .cta-section { padding: 64px 20px; }
+      .beat p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="wordmark">principl</span>
+    <div class="header-rule">Digital Transformation & AI Advisory</div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">Digital Transformation & AI Advisory</div>
+    <h1>AI adoption isn't a technology problem. It's an <em>operations</em> problem.</h1>
+    <div class="hero-body">
+      <p>Every organization recognizes AI's potential. Most don't know where to start, and the ones that do are usually starting in the wrong place.</p>
+      <p>Leadership says "we need to be using AI" and what follows is predictable: tool purchases without a rollout plan, fractured pilot programs, teams experimenting in isolation, and a growing sense that everyone else has figured this out already.</p>
+      <p><strong>The gap isn't awareness, it's methodology.</strong> Principl helps organizations move from experimentation to infrastructure with a first-principles approach that connects AI adoption to the systems, workflows, and revenue motions that already exist.</p>
+      <a href="#HUBSPOT_MEETING_LINK" class="cta-button">Book a Conversation</a>
+    </div>
+  </section>
+
+  <!-- Breakout -->
+  <div class="breakout">
+    <div class="breakout-inner reveal">
+      The companies that win with AI won't be the ones that <em>adopted it first.</em> They'll be the ones that adopted it <em>intentionally.</em>
+    </div>
+  </div>
+
+  <!-- The Problem -->
+  <section class="section reveal">
+    <div class="section-label">What we keep seeing</div>
+    <div class="section-content">
+      <p>AI adoption efforts fail for the same reasons, over and over. There's no operating plan. Tools get purchased before the problem is clearly defined. Teams experiment in silos without sharing what works or what doesn't. Nobody connects the AI initiative back to the existing systems of record, the workflows that actually run the business.</p>
+      <p>The result is churn, not progress. Six months and three tools later, the organization has a collection of disconnected experiments and no measurable change in how work gets done.</p>
+      <p><strong>This isn't a technology gap.</strong> The tools are good enough. The models are good enough. What's missing is a methodology for figuring out where AI creates value in your specific operation, building it into the infrastructure you already have, and giving your team the confidence to actually use it.</p>
+      <p>That's a solvable problem.</p>
+    </div>
+  </section>
+
+  <!-- The Approach -->
+  <section class="section reveal">
+    <div class="section-label">How we work</div>
+    <div class="section-content">
+      <p>First-principles, not vendor-driven. Industry-agnostic. Every engagement starts with the same question: what does this business actually need?</p>
+      <p>From there, we map to existing systems and infrastructure, identify where AI creates measurable value, and produce a bespoke operating system your team can run without us. The deliverable is working infrastructure, not a slide deck or a tool recommendation.</p>
+      <p>The through-line across nearly two decades of work has been the same: when a new technology emerges, most organizations buy it before they understand it. The ones that win are the ones that figure out how it connects to the way they already operate, then build the system around that connection.</p>
+      <p><strong>Social media. Digital marketing. AI.</strong> The technology changes. The pattern doesn't.</p>
+    </div>
+  </section>
+
+  <!-- The Practitioner -->
+  <section class="section reveal">
+    <div class="section-label">The practitioner</div>
+    <div class="section-content">
+
+      <div class="beat">
+        <div class="beat-label">Big Agency Origins</div>
+        <p>Started in Chicago, launching brands on emerging social platforms when social publishing was the new, misunderstood technology. Personally built the pages for Campbell's Chunky Soup and Kellogg NutriGrain. Helped define the digital and social support strategy for every Samsung mobile launch from the Galaxy S2 through the Note 4. Built the analytics framework that demonstrated social media as a revenue channel for Delta Air Lines.</p>
+      </div>
+
+      <div class="beat">
+        <div class="beat-label">Founder & Operator</div>
+        <p>Took the playbook independent. Built a marketing agency to <strong>$1M in 14 months</strong> with 9 full-time employees. Built a solar sales organization from <strong>$0 to $3M</strong>. Grew a DTC brand from <strong>$100K to $1.2M</strong>. Each venture required building revenue systems from scratch in industries with no existing playbook.</p>
+      </div>
+
+      <div class="beat">
+        <div class="beat-label">Enterprise AI Operator</div>
+        <p>Currently in customer marketing at a growth-stage, AI-forward B2B software company. Not advising on AI from the outside, operating inside it daily. Top Claude Code user in a 540-person organization. Living inside the tools, building with them, understanding where they work and where they break.</p>
+      </div>
+
+      <div class="beat">
+        <div class="beat-label">Academic Practitioner</div>
+        <p>Professor at the University of Nevada, Reno, College of Business, an R1 research institution. MBA candidate. Teaching while doing. The methodology isn't theoretical, it's refined in real engagements and pressure-tested in academic rigor.</p>
+      </div>
+
+      <div class="through-line">
+        <p>Every time a new technology emerges, social media, digital marketing, AI, the pattern is the same. Figure out how it <em>generates revenue.</em> Build the system. Teach others to run it.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-section-inner reveal">
+      <div class="section-label-dark">Let's Talk</div>
+      <h2>If your organization is navigating AI adoption and needs a practitioner, not a vendor, let's talk.</h2>
+      <a href="#HUBSPOT_MEETING_LINK" class="cta-button-dark">Book a Conversation</a>
+      <p class="cta-footnote">Or reach out directly at <a href="mailto:danny@principl.ai">danny@principl.ai</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">principl.ai</div>
+    <div class="footer-right"><a href="mailto:danny@principl.ai">danny@principl.ai</a></div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
