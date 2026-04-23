@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
-COPY server.ts db.ts notify.ts homepage.html revenue-residency.html headshot.jpg ./
+COPY server.ts db.ts notify.ts homepage.html revenue-residency.html mid-market-tech.html headshot.jpg ./
 
 EXPOSE 8080
 

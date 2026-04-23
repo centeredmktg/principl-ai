@@ -59,6 +59,10 @@ const revenueResidencyHtml = await Bun.file(
   new URL("./revenue-residency.html", import.meta.url).pathname
 ).text();
 
+const midMarketTechHtml = await Bun.file(
+  new URL("./mid-market-tech.html", import.meta.url).pathname
+).text();
+
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 8080),
 
@@ -76,6 +80,12 @@ const server = Bun.serve({
 
     if (path === "/revenue-residency" && req.method === "GET") {
       return new Response(revenueResidencyHtml, {
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
+    }
+
+    if (path === "/mid-market-tech" && req.method === "GET") {
+      return new Response(midMarketTechHtml, {
         headers: { "Content-Type": "text/html; charset=utf-8" },
       });
     }

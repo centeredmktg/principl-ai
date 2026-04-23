@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principl — AI Adoption Program (Line Card)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #226b03;
+      --green-light: #2a8204;
+      --green-faint: #eef4e9;
+      --ink: #111;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #7a7a7a;
+      --surface: #fdfcfa;
+      --surface-warm: #f6f4f0;
+      --surface-deep: #efece6;
+      --border: #e2dfda;
+      --border-strong: #cfcbc2;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--surface);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: 9999;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 64px 48px;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .wordmark {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .header-meta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      max-width: 620px;
+    }
+
+    /* ─── Section ─── */
+    section {
+      margin-bottom: 30px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-statement {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 760px;
+    }
+
+    .problem-statement strong {
+      font-family: var(--sans);
+      font-weight: 600;
+      color: var(--green);
+      font-size: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── Approach (4 principles) ─── */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+    }
+
+    .principle {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .principle-num {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--green);
+      line-height: 1;
+      min-width: 28px;
+      padding-top: 2px;
+    }
+
+    .principle-body h4 {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      letter-spacing: 0.005em;
+    }
+
+    .principle-body p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ─── Outcomes ─── */
+    .outcomes-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+
+    .outcomes-list li {
+      font-size: 13px;
+      color: var(--text);
+      padding-left: 22px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .outcomes-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ─── Tiers ─── */
+    .tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .tier {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      padding: 18px 18px 20px;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tier.featured {
+      background: var(--green-faint);
+      border-color: var(--green-light);
+      position: relative;
+    }
+
+    .tier.featured::after {
+      content: 'MOST COMMON';
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: var(--green);
+      color: white;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      padding: 2px 8px;
+      border-radius: 1px;
+    }
+
+    .tier-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .tier-meta {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .tier-price {
+      font-family: var(--sans);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .tier-duration {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .tier-tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tier-includes {
+      list-style: none;
+      flex: 1;
+    }
+
+    .tier-includes li {
+      font-size: 11.5px;
+      color: var(--text);
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .tier-includes li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    /* ─── Bottom row ─── */
+    .bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    .not-doing {
+      background: var(--surface-deep);
+      border-left: 3px solid var(--ink);
+      padding: 14px 18px;
+    }
+
+    .not-doing-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .not-doing-text {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .not-doing-text strong {
+      font-weight: 600;
+    }
+
+    .credibility {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .credibility .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ─── Footer / CTA ─── */
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .cta-block .cta-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .cta-block .cta-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      line-height: 1.35;
+      max-width: 380px;
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .contact .contact-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+      display: block;
+    }
+
+    .contact a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ─── Print ─── */
+    @page {
+      size: letter;
+      margin: 0.4in;
+    }
+
+    @media print {
+      body { background: white; }
+      body::before { display: none; }
+      .page { padding: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="wordmark">Principl</div>
+      <div class="header-meta">Line Card · AI Adoption Program</div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-eyebrow">For mid-market tech companies</div>
+      <h1 class="hero-title">From AI for AI's sake<br>to AI as strategic infrastructure.</h1>
+      <p class="hero-sub">A facilitated program that aligns your AI exploration with the strategic initiatives leadership is already accountable for — and gives your team the structure to make it compound.</p>
+    </div>
+
+    <!-- Problem -->
+    <section>
+      <div class="section-label">The Problem</div>
+      <p class="problem-statement">
+        Your team is experimenting with AI. Pockets of power-users, scattered tool subscriptions, the occasional internal demo. <strong>None of it tied to the strategic initiatives leadership is actually accountable for.</strong> Motion without progress, cost without ROI, no path from "playing with AI" to "AI is changing how we operate." The fix isn't more tools — it's a program.
+      </p>
+    </section>
+
+    <!-- Approach (the new hero) -->
+    <section>
+      <div class="section-label">The Approach</div>
+      <div class="approach-grid">
+        <div class="principle">
+          <div class="principle-num">01</div>
+          <div class="principle-body">
+            <h4>Anchor to existing strategic initiatives</h4>
+            <p>We don't pitch AI strategy in a vacuum. Every recommendation maps to OKRs and roadmap items leadership already owns.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">02</div>
+          <div class="principle-body">
+            <h4>Discovery before structure, structure before execution</h4>
+            <p>Most rollouts skip the diagnosis. We map current state, opportunity, and bottlenecks before designing anything.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">03</div>
+          <div class="principle-body">
+            <h4>The COE is the accelerator</h4>
+            <p>A well-designed Center of Excellence turns scattered exploration into compound returns. We design yours for your org — not from a template.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">04</div>
+          <div class="principle-body">
+            <h4>Your team owns it, end to end</h4>
+            <p>We're the program architect and change-management coach — not a build shop, not an agency that disappears with the playbook.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes -->
+    <section>
+      <div class="section-label">What You Walk Away With</div>
+      <ul class="outcomes-list">
+        <li>A prioritized opportunity map tied to your existing strategic priorities</li>
+        <li>A sanctioned exploration framework your team can run on day one</li>
+        <li>A Center of Excellence structure designed for your org, ready to staff</li>
+        <li>An internal program lead prepared to own ongoing execution</li>
+      </ul>
+    </section>
+
+    <!-- Tiers -->
+    <section>
+      <div class="section-label">Engagement Tiers</div>
+      <div class="tiers">
+
+        <div class="tier">
+          <div class="tier-name">Discovery Sprint</div>
+          <div class="tier-meta">Advisory</div>
+          <div class="tier-price">$10K</div>
+          <div class="tier-duration">4 weeks</div>
+          <p class="tier-tagline">"Tell us where to start, what's going to block us, and how to structure exploration."</p>
+          <ul class="tier-includes">
+            <li>Discovery + opportunity map</li>
+            <li>Systems & bottlenecks audit</li>
+            <li>Exploration framework</li>
+            <li>COE model design</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="tier-name">Activation Program</div>
+          <div class="tier-meta">Advisory + Facilitation</div>
+          <div class="tier-price">$50K</div>
+          <div class="tier-duration">12 weeks</div>
+          <p class="tier-tagline">"Diagnose, design, and stand the program up. Run our first pilot together."</p>
+          <ul class="tier-includes">
+            <li>Everything in Discovery Sprint</li>
+            <li>Executive alignment workshop</li>
+            <li>COE stood up + first charter</li>
+            <li>First pilot designed + launched with internal lead</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="tier-name">Embedded Partnership</div>
+          <div class="tier-meta">Embedded</div>
+          <div class="tier-price">$100K</div>
+          <div class="tier-duration">6 months</div>
+          <p class="tier-tagline">"Guided implementation across multiple initiatives, until your operating model is self-running."</p>
+          <ul class="tier-includes">
+            <li>Everything in Activation Program</li>
+            <li>3–5 strategic-initiative pilots sequenced</li>
+            <li>Monthly COE governance reviews</li>
+            <li>Quarterly leadership business review</li>
+            <li>Outcome measurement framework</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom row: scope guardrail + credibility -->
+    <div class="bottom-row">
+      <div class="not-doing">
+        <div class="not-doing-label">What we don't do</div>
+        <p class="not-doing-text">
+          Build your tools. Pick your stack. Run your pilots without your people. Take ownership of the COE long-term. <strong>Your people own execution.</strong> We're the program architect and change-management coach. Miyagi, not mechanic.
+        </p>
+      </div>
+
+      <div class="credibility">
+        <span class="name">Danny Cox</span>
+        Enterprise digital transformation pedigree (Razorfish — Delta Air Lines, Samsung, Google). Currently inside an active AI transformation at Ridgeline as a top 1% Claude Code operator. Faculty at the University of Nevada, Reno College of Business; MBA in progress. The methodology runs in live engagements and gets taught — pressure-tested in both directions.
+      </div>
+    </div>
+
+    <!-- Footer / CTA -->
+    <footer class="footer">
+      <div class="cta-block">
+        <div class="cta-eyebrow">How to start</div>
+        <p class="cta-text">A 30-minute intro to scope fit. Most engagements open within two weeks.</p>
+      </div>
+      <div class="contact">
+        <span class="contact-name">Danny Cox</span>
+        <a href="mailto:danny@principl.ai">danny@principl.ai</a><br>
+        <a href="https://principl.ai">principl.ai</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
