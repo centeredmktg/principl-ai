@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process-to-Platform — Casting & Film Production</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #226b03;
+      --green-light: #2a8204;
+      --green-faint: #eef4e9;
+      --ink: #111;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --text-tertiary: #7a7a7a;
+      --surface: #fdfcfa;
+      --surface-warm: #f6f4f0;
+      --surface-deep: #efece6;
+      --border: #e2dfda;
+      --border-strong: #cfcbc2;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Outfit', -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--surface);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      z-index: 9999;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 64px 48px;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .wordmark {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 10px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .header-meta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      max-width: 620px;
+    }
+
+    /* ─── Section ─── */
+    section {
+      margin-bottom: 30px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-statement {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 760px;
+    }
+
+    .problem-statement strong {
+      font-family: var(--sans);
+      font-weight: 600;
+      color: var(--green);
+      font-size: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── Approach (4 principles) ─── */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 28px;
+    }
+
+    .principle {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .principle-num {
+      font-family: var(--serif);
+      font-size: 26px;
+      color: var(--green);
+      line-height: 1;
+      min-width: 28px;
+      padding-top: 2px;
+    }
+
+    .principle-body h4 {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      letter-spacing: 0.005em;
+    }
+
+    .principle-body p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ─── Outcomes ─── */
+    .outcomes-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+
+    .outcomes-list li {
+      font-size: 13px;
+      color: var(--text);
+      padding-left: 22px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .outcomes-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ─── Tiers ─── */
+    .tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .tier {
+      background: var(--surface-warm);
+      border: 1px solid var(--border);
+      padding: 18px 18px 20px;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tier.featured {
+      background: var(--green-faint);
+      border-color: var(--green-light);
+      position: relative;
+    }
+
+    .tier.featured::after {
+      content: 'MOST COMMON';
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: var(--green);
+      color: white;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      padding: 2px 8px;
+      border-radius: 1px;
+    }
+
+    .tier-name {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .tier-meta {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .tier-price {
+      font-family: var(--sans);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .tier-duration {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .tier-tagline {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tier-includes {
+      list-style: none;
+      flex: 1;
+    }
+
+    .tier-includes li {
+      font-size: 11.5px;
+      color: var(--text);
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .tier-includes li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    /* ─── Bottom row ─── */
+    .bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    .not-doing {
+      background: var(--surface-deep);
+      border-left: 3px solid var(--ink);
+      padding: 14px 18px;
+    }
+
+    .not-doing-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .not-doing-text {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .not-doing-text strong {
+      font-weight: 600;
+    }
+
+    .credibility {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .credibility .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ─── Footer / CTA ─── */
+    .footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 2px solid var(--ink);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .cta-block .cta-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .cta-block .cta-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      line-height: 1.35;
+      max-width: 380px;
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .contact .contact-name {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--ink);
+      display: block;
+    }
+
+    .contact a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ─── Print ─── */
+    @page {
+      size: letter;
+      margin: 0.4in;
+    }
+
+    @media print {
+      body { background: white; }
+      body::before { display: none; }
+      .page { padding: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="wordmark">Principl</div>
+      <div class="header-meta">Line Card · Casting & Production Operations</div>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-eyebrow">For casting offices and production companies</div>
+      <h1 class="hero-title">From craft in your head<br>to a platform the studio runs on.</h1>
+      <p class="hero-sub">Sourcing, tagging, time-coded notes, follow-up, scheduling, call sheets — your process is already refined. We translate it into software, so reach scales, training compounds, and growth has a platform underneath it.</p>
+    </div>
+
+    <!-- Problem -->
+    <section>
+      <div class="section-label">The Problem</div>
+      <p class="problem-statement">
+        Your team has the craft. The way you source talent, tag and track notes, log time-coded recommendations, manage follow-up, build call sheets, and revisit a name when the right project lands — that process is what makes the work great. <strong>It lives in spreadsheets, inboxes, and the senior people's heads.</strong> That works at one studio's scale. It breaks the moment you try to expand reach, ramp a new coordinator, or run more projects in parallel. The fix isn't more headcount or another off-the-shelf tool — it's encoding the process you already trust.
+      </p>
+    </section>
+
+    <!-- Approach -->
+    <section>
+      <div class="section-label">The Approach</div>
+      <div class="approach-grid">
+        <div class="principle">
+          <div class="principle-num">01</div>
+          <div class="principle-body">
+            <h4>Your process is the spec</h4>
+            <p>We don't impose a template or a generic ATS. We document the way your team actually works — and that becomes what we build.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">02</div>
+          <div class="principle-body">
+            <h4>Scale reach without losing taste</h4>
+            <p>The point isn't replacing curation. It's making sure no good name slips through, follow-ups happen on time, and prior decisions stay searchable across every project.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">03</div>
+          <div class="principle-body">
+            <h4>Training as a byproduct</h4>
+            <p>When the system holds the process, new hires ramp by working in it — not shadowing for two years. The platform becomes the apprenticeship.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">04</div>
+          <div class="principle-body">
+            <h4>Operating leverage, not workflow software</h4>
+            <p>Built for how casting actually moves: tagging at time-code, call sheets generated from decisions, recommendations that resurface when the right project lands. Not a CRM bent into shape.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes -->
+    <section>
+      <div class="section-label">What You Walk Away With</div>
+      <ul class="outcomes-list">
+        <li>A sourcing pipeline that compounds with every project, not resets</li>
+        <li>Time-coded tags and notes searchable across years of sessions</li>
+        <li>Scheduling and call sheets generated from your decisions, not rebuilt each project</li>
+        <li>Follow-up and re-evaluation surfaced at the right moment, not lost in inboxes</li>
+        <li>New hires productive in weeks because the system holds the craft</li>
+        <li>A platform for expansion — new offices, new project types, new partnerships</li>
+      </ul>
+    </section>
+
+    <!-- Tiers -->
+    <section>
+      <div class="section-label">Engagement Tiers</div>
+      <div class="tiers">
+
+        <div class="tier">
+          <div class="tier-name">Process Map</div>
+          <div class="tier-meta">Advisory</div>
+          <div class="tier-price">$10K</div>
+          <div class="tier-duration">4 weeks</div>
+          <p class="tier-tagline">"Document the craft. Show us where software gets the highest leverage first."</p>
+          <ul class="tier-includes">
+            <li>Process audit across sourcing, tagging, scheduling, follow-up</li>
+            <li>Bottleneck + leverage analysis</li>
+            <li>Software roadmap with sequencing</li>
+            <li>Build-vs-tool decisions</li>
+          </ul>
+        </div>
+
+        <div class="tier featured">
+          <div class="tier-name">Pilot Build</div>
+          <div class="tier-meta">Advisory + Build</div>
+          <div class="tier-price">$50K</div>
+          <div class="tier-duration">12 weeks</div>
+          <p class="tier-tagline">"Encode one workflow end-to-end. Ship it. Train the team in it."</p>
+          <ul class="tier-includes">
+            <li>Everything in Process Map</li>
+            <li>One workflow built to production</li>
+            <li>Internal champion enabled</li>
+            <li>Training assets generated from the system</li>
+          </ul>
+        </div>
+
+        <div class="tier">
+          <div class="tier-name">Studio Partnership</div>
+          <div class="tier-meta">Embedded</div>
+          <div class="tier-price">$100K</div>
+          <div class="tier-duration">6 months</div>
+          <p class="tier-tagline">"Multi-workflow buildout, training architecture, platform for growth."</p>
+          <ul class="tier-includes">
+            <li>Everything in Pilot Build</li>
+            <li>3–5 workflows sequenced end-to-end</li>
+            <li>Onboarding/training system built into the platform</li>
+            <li>Quarterly platform review</li>
+            <li>Expansion roadmap for new offices and project types</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom row: scope guardrail + credibility -->
+    <div class="bottom-row">
+      <div class="not-doing">
+        <div class="not-doing-label">What we don't do</div>
+        <p class="not-doing-text">
+          Replace your taste. Sell you a generic CRM or ATS. Lock you in to our stack. Disappear with the playbook. <strong>Your team owns the platform.</strong> We translate the process you already trust into software — and hand you the keys.
+        </p>
+      </div>
+
+      <div class="credibility">
+        <span class="name">Danny Cox</span>
+        Enterprise digital transformation pedigree (Razorfish — Delta Air Lines, Samsung, Google). Currently inside an active AI transformation at Ridgeline as a top 1% Claude Code operator — translating refined operating processes into software at speed. Faculty at the University of Nevada, Reno College of Business; MBA in progress.
+      </div>
+    </div>
+
+    <!-- Footer / CTA -->
+    <footer class="footer">
+      <div class="cta-block">
+        <div class="cta-eyebrow">How to start</div>
+        <p class="cta-text">A 30-minute intro to scope fit. Most engagements open within two weeks.</p>
+      </div>
+      <div class="contact">
+        <span class="contact-name">Danny Cox</span>
+        <a href="mailto:danny@principl.ai">danny@principl.ai</a><br>
+        <a href="https://principl.ai">principl.ai</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
