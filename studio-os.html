@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio OS · Talent + Casting + Production — principl.ai</title>
+  <meta name="description" content="Operational software for talent and casting firms expanding into development and production. Designed and installed by an operator, not a vendor." />
+  <style>
+    /* ============================================================
+       Principl — tokens
+       ============================================================ */
+
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+    :root {
+      --ink:           #0B1B2B;
+      --ink-90:        #11243A;
+      --ink-70:        #2A3B50;
+      --ink-50:        #5A6B80;
+      --ink-30:        #94A2B5;
+      --rule-soft:     rgba(11, 27, 43, 0.12);
+      --rule-hair:     rgba(11, 27, 43, 0.18);
+
+      --blueprint:     #1B3A6B;
+      --blueprint-deep:#0F2647;
+      --blueprint-ink: #06142B;
+
+      --cream:         #F4EFE3;
+      --cream-soft:    #EDE6D4;
+      --paper:         #FBF8F0;
+
+      --accent:        #C8541F;
+
+      --bg:            var(--cream);
+      --surface:       var(--paper);
+      --surface-2:     var(--cream-soft);
+      --text:          var(--ink);
+      --on-dark-muted: rgba(244, 239, 227, 0.62);
+
+      --font-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+
+      --t-h2:        clamp(1.875rem, 3.6vw, 3rem);
+      --t-lead:      clamp(1.125rem, 1.4vw, 1.375rem);
+      --t-body:      1.0625rem;
+      --t-small:     0.9375rem;
+      --t-mono:      0.8125rem;
+      --t-micro:     0.6875rem;
+
+      --tk-display:  -0.035em;
+      --tk-h:        -0.022em;
+      --tk-body:     -0.005em;
+      --tk-mono:     0.02em;
+      --tk-caps:     0.14em;
+
+      --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+      --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+      --s-9: 96px; --s-10: 128px;
+
+      --measure-wide:  1240px;
+      --gutter:        clamp(20px, 4vw, 48px);
+
+      --r-2: 4px; --r-pill: 999px;
+
+      --dur:      220ms;
+      --ease:     cubic-bezier(.2,.6,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--t-body);
+      line-height: 1.55;
+      letter-spacing: var(--tk-body);
+      font-feature-settings: "ss01", "ss02", "cv11";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      transition: opacity var(--dur) var(--ease);
+    }
+    a:hover { opacity: 0.7; }
+
+    ::selection { background: var(--blueprint); color: var(--cream); }
+
+    .t-mono { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); font-weight: 400; }
+
+    em.italic, .italic { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+
+    .container { max-width: var(--measure-wide); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+    section { padding-block: var(--s-10); }
+    @media (max-width: 720px) { section { padding-block: var(--s-9); } }
+
+    .brand-bar { height: 4px; background: var(--blueprint); position: relative; }
+    .brand-bar::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--blueprint) 0%, var(--blueprint) 64%, var(--accent) 64%, var(--accent) 68%, var(--blueprint) 68%, var(--blueprint) 100%);
+    }
+
+    .wordmark {
+      font-family: var(--font-sans);
+      font-weight: 500; font-size: 1.0625rem;
+      letter-spacing: -0.018em;
+      display: inline-flex; align-items: baseline; gap: 2px;
+      color: var(--ink); border: 0;
+    }
+    .wordmark__dot { width: 6px; height: 6px; display: inline-block; background: var(--accent); border-radius: 50%; margin-left: 2px; transform: translateY(-1px); }
+    .wordmark--lg { font-size: 1.5rem; }
+    .wordmark--lg .wordmark__dot { width: 8px; height: 8px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--s-3);
+      padding: 14px 22px;
+      font-family: var(--font-sans); font-size: var(--t-small); font-weight: 500;
+      letter-spacing: -0.005em;
+      border: 1px solid transparent; border-radius: var(--r-2);
+      cursor: pointer; transition: all var(--dur) var(--ease);
+      text-decoration: none; background: none; line-height: 1;
+    }
+    .btn__arrow { font-family: var(--font-mono); transition: transform var(--dur) var(--ease); }
+    .btn:hover .btn__arrow { transform: translateX(3px); }
+
+    .btn--primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .btn--primary:hover { background: var(--blueprint); border-color: var(--blueprint); opacity: 1; }
+
+    .btn--blueprint { background: var(--blueprint); color: var(--cream); border-color: var(--blueprint); }
+    .btn--blueprint:hover { background: var(--blueprint-deep); border-color: var(--blueprint-deep); opacity: 1; }
+
+    .btn--outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn--outline:hover { background: var(--ink); color: var(--cream); opacity: 1; }
+
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule-hair); }
+    .btn--ghost:hover { border-color: var(--ink); opacity: 1; }
+
+    .btn--lg { padding: 18px 28px; font-size: var(--t-body); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--s-3);
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-70); font-weight: 500;
+    }
+    .eyebrow__num { color: var(--accent); }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; display: inline-block; }
+
+    .figure-label {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50); font-weight: 500;
+    }
+
+    .nav { display: flex; align-items: center; justify-content: space-between; padding-block: var(--s-5); gap: var(--s-5); }
+
+    .muted { color: var(--ink-70); }
+
+    h1 em, h2 em, h3 em {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* ============================================================
+       Page-specific styles
+       ============================================================ */
+
+    .nav-shell {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(244, 239, 227, 0.86);
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .nav-shell .brand-bar { height: 3px; }
+    .nav-tag {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-50);
+      display: inline-flex; align-items: center; gap: var(--s-2);
+    }
+    .nav-tag::before { content: ""; width: 12px; height: 1px; background: currentColor; }
+    @media (max-width: 800px) { .nav-tag { display: none; } }
+
+    /* HERO */
+    .hero { position: relative; padding-top: var(--s-9); padding-bottom: var(--s-9); overflow: hidden; }
+    .hero__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(11,27,43,0.045) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .hero__inner { position: relative; }
+
+    .hero__masthead {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s-5);
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    .hero__masthead-item .figure-label { display: block; margin-bottom: 6px; }
+    .hero__masthead-item p { margin: 0; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink); }
+    @media (max-width: 720px) { .hero__masthead { grid-template-columns: 1fr; gap: var(--s-3); } }
+
+    .hero__headline {
+      font-size: clamp(2.5rem, 5.4vw, 4.75rem);
+      line-height: 1.0; letter-spacing: var(--tk-display);
+      font-weight: 500; margin: 0; max-width: 24ch;
+    }
+    .hero__lede {
+      font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+      line-height: 1.5; color: var(--ink-70);
+      margin: var(--s-7) 0 0; max-width: 60ch; text-wrap: pretty;
+    }
+    .hero__cta { margin-top: var(--s-7); display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+    .hero__cta-meta { font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-50); letter-spacing: var(--tk-mono); margin-left: var(--s-4); }
+
+    /* People-vs-software diagram */
+    .splitplate { margin-top: var(--s-9); padding-top: var(--s-7); border-top: 1px solid var(--rule-hair); }
+    .splitplate__cap { display: flex; justify-content: space-between; margin-bottom: var(--s-4); flex-wrap: wrap; gap: var(--s-3); }
+    .splitplate__row {
+      display: grid; grid-template-columns: 1fr 80px 1fr;
+      gap: var(--s-5); align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      .splitplate__row { grid-template-columns: 1fr; gap: var(--s-3); }
+      .splitplate__hinge { display: none !important; }
+    }
+    .splitplate__cell {
+      padding: var(--s-6);
+      background: var(--paper);
+      border: 1px solid var(--rule-hair);
+      border-radius: var(--r-2);
+      min-height: 160px;
+      display: flex; flex-direction: column; gap: var(--s-3);
+    }
+    .splitplate__cell--people { background: var(--cream-soft); }
+    .splitplate__cell--software { border-color: var(--blueprint); border-width: 1.5px; }
+    .splitplate__cell .figure-label { color: var(--ink-50); }
+    .splitplate__cell--software .figure-label { color: var(--blueprint); }
+    .splitplate__cell h3 {
+      font-size: 1.5rem; line-height: 1.15;
+      letter-spacing: var(--tk-h); font-weight: 500; margin: 0;
+    }
+    .splitplate__cell ul {
+      margin: var(--s-3) 0 0; padding: 0; list-style: none;
+      display: grid; gap: var(--s-2);
+    }
+    .splitplate__cell li {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-70);
+      padding-left: 16px; position: relative;
+    }
+    .splitplate__cell li::before { content: "—"; position: absolute; left: 0; color: var(--ink-30); }
+    .splitplate__cell--software li::before { color: var(--accent); }
+
+    .splitplate__hinge { display: flex; align-items: center; justify-content: center; position: relative; }
+    .splitplate__hinge svg { width: 100%; height: 24px; }
+
+    /* PROBLEM */
+    .problem {
+      padding-block: var(--s-9);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .problem__grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--s-9); align-items: start; }
+    @media (max-width: 900px) { .problem__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
+    .problem h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-3) 0 0; max-width: 16ch;
+    }
+    .problem__body p { margin: 0; font-size: var(--t-lead); line-height: 1.55; color: var(--ink-70); text-wrap: pretty; }
+    .problem__body p strong { color: var(--ink); font-weight: 500; }
+    .problem__body p + p { margin-top: var(--s-5); }
+    .problem__pull {
+      margin-top: var(--s-6); padding-top: var(--s-5);
+      border-top: 2px solid var(--ink);
+    }
+    .problem__pull p {
+      font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+      line-height: 1.2; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 36ch;
+    }
+
+    /* APPROACH */
+    .approach { padding-block: var(--s-10); }
+    .approach__head {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s-7); align-items: end;
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    @media (max-width: 800px) { .approach__head { grid-template-columns: 1fr; } }
+    .approach__head h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.05; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 22ch;
+    }
+    .approach__head p { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-70); margin: 0; max-width: 48ch; }
+
+    .moves {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border-left: 1px solid var(--rule-hair);
+    }
+    @media (max-width: 1024px) { .moves { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .moves { grid-template-columns: 1fr; } }
+    .move {
+      padding: var(--s-6) var(--s-5) var(--s-7);
+      border-right: 1px solid var(--rule-hair);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
+      position: relative; min-height: 280px;
+      display: flex; flex-direction: column;
+    }
+    .move__num {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--accent);
+      margin-bottom: var(--s-7);
+    }
+    .move h3 { font-size: 1.25rem; line-height: 1.2; letter-spacing: var(--tk-h); font-weight: 500; margin: 0 0 var(--s-3); }
+    .move p { font-size: var(--t-small); line-height: 1.55; color: var(--ink-70); margin: 0; text-wrap: pretty; }
+
+    /* OUTCOMES */
+    .outcomes {
+      padding-block: var(--s-10);
+      background: var(--blueprint-ink); color: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .outcomes__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(244,239,227,0.05) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .outcomes .container { position: relative; }
+    .outcomes__head { max-width: 26ch; margin-bottom: var(--s-7); }
+    .outcomes__head h2 {
+      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-5) 0 0;
+    }
+    .deliverables {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+      background: rgba(244,239,227,0.18);
+      border: 1px solid rgba(244,239,227,0.18);
+    }
+    @media (max-width: 800px) { .deliverables { grid-template-columns: 1fr; } }
+    .deliverable {
+      padding: var(--s-6); background: var(--blueprint-ink);
+      display: grid; grid-template-columns: 60px 1fr; gap: var(--s-4);
+    }
+    .deliverable__num { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--accent); }
+    .deliverable h3 { font-size: 1.125rem; line-height: 1.25; letter-spacing: -0.012em; font-weight: 500; margin: 0 0 var(--s-2); }
+    .deliverable p { font-size: var(--t-small); line-height: 1.5; margin: 0; color: rgba(244,239,227,0.62); }
+
+    /* TIERS */
+    .tiers { padding-block: var(--s-10); }
+    .tiers__head {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s-7); align-items: end;
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    @media (max-width: 800px) { .tiers__head { grid-template-columns: 1fr; } }
+    .tiers__head h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 22ch;
+    }
+    .tiers__head p { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-70); margin: 0; max-width: 48ch; }
+
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+    @media (max-width: 1024px) { .tier-grid { grid-template-columns: 1fr; } }
+
+    .tier {
+      background: var(--paper); border: 1px solid var(--rule-hair);
+      border-radius: var(--r-2); padding: var(--s-6);
+      display: flex; flex-direction: column; position: relative;
+    }
+    .tier--featured { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+    .tier__pin {
+      position: absolute; top: -10px; right: var(--s-5);
+      background: var(--accent); color: var(--cream);
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      padding: 4px 10px; border-radius: var(--r-2);
+    }
+    .tier__head {
+      padding-bottom: var(--s-5);
+      border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-5);
+    }
+    .tier--featured .tier__head { border-bottom-color: rgba(244,239,227,0.18); }
+    .tier__code {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50);
+      display: flex; justify-content: space-between;
+    }
+    .tier--featured .tier__code { color: rgba(244,239,227,0.5); }
+    .tier__name {
+      font-size: 1.625rem; line-height: 1.1;
+      letter-spacing: var(--tk-h); font-weight: 500;
+      margin: var(--s-3) 0 var(--s-3);
+    }
+    .tier__price { display: flex; align-items: baseline; gap: var(--s-3); margin-bottom: var(--s-3); }
+    .tier__price-num { font-size: 2.25rem; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+    .tier--featured .tier__price-num { color: var(--cream); }
+    .tier__price-meta { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink-50); }
+    .tier--featured .tier__price-meta { color: rgba(244,239,227,0.62); }
+
+    .tier__quote {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 1.0625rem; line-height: 1.45;
+      color: var(--ink-70); margin: 0; text-wrap: pretty;
+    }
+    .tier--featured .tier__quote { color: rgba(244,239,227,0.86); }
+    .tier__quote::before { content: "\201C"; }
+    .tier__quote::after { content: "\201D"; }
+
+    .tier__includes {
+      list-style: none; padding: 0; margin: 0;
+      flex: 1; display: grid; gap: var(--s-3);
+    }
+    .tier__includes li {
+      font-size: var(--t-small); line-height: 1.45;
+      padding-left: 18px; position: relative; color: var(--ink-70);
+    }
+    .tier--featured .tier__includes li { color: rgba(244,239,227,0.86); }
+    .tier__includes li::before {
+      content: "+"; position: absolute; left: 0; top: 0;
+      font-family: var(--font-mono); color: var(--accent); font-weight: 500;
+    }
+    .tier__includes li.is-meta {
+      padding-left: 0;
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      letter-spacing: var(--tk-caps); text-transform: uppercase;
+      color: var(--ink-50);
+      border-bottom: 1px solid var(--rule-hair);
+      padding-bottom: var(--s-3);
+    }
+    .tier--featured .tier__includes li.is-meta {
+      color: rgba(244,239,227,0.5);
+      border-bottom-color: rgba(244,239,227,0.18);
+    }
+    .tier__includes li.is-meta::before { content: ""; }
+
+    .tier__cta { margin-top: var(--s-6); }
+
+    /* NOT-DOING */
+    .not-doing {
+      padding-block: var(--s-10);
+      background: var(--surface-2);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .not-doing__grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--s-9); align-items: start; }
+    @media (max-width: 900px) { .not-doing__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
+    .not-doing h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-3) 0 0; max-width: 14ch;
+    }
+    .not-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .not-list li {
+      display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3);
+      align-items: baseline;
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .not-list li:first-child { border-top: 1px solid var(--rule-hair); }
+    .not-list__mark { font-family: var(--font-mono); color: var(--ink-30); font-size: 1.125rem; line-height: 1; }
+    .not-list__text { font-size: 1.125rem; line-height: 1.4; color: var(--ink); }
+    .not-doing__pull {
+      margin-top: var(--s-7); padding-top: var(--s-6);
+      border-top: 2px solid var(--ink);
+    }
+    .not-doing__pull p {
+      font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+      line-height: 1.15; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 26ch;
+    }
+    .principal-line {
+      margin-top: var(--s-5);
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-50);
+    }
+    .principal-line strong { color: var(--accent); font-weight: 500; }
+
+    /* DANNY */
+    .danny { padding-block: var(--s-10); }
+    .danny__head {
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: var(--s-7); align-items: start;
+      padding-bottom: var(--s-7); border-bottom: 1px solid var(--rule-hair);
+    }
+    @media (max-width: 800px) { .danny__head { grid-template-columns: 1fr; } }
+    .danny__id { display: grid; grid-template-columns: 96px 1fr; gap: var(--s-4); align-items: center; }
+    .danny__photo {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: var(--blueprint); color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); font-weight: 500; font-size: 32px;
+      letter-spacing: -0.02em;
+      box-shadow: 0 0 0 4px var(--cream), 0 0 0 5px var(--accent);
+      overflow: hidden;
+    }
+    .danny__photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .danny__name { font-size: 1.5rem; line-height: 1.1; letter-spacing: var(--tk-h); font-weight: 500; margin: 0; }
+    .danny__role { margin: 4px 0 0; font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-50); letter-spacing: var(--tk-mono); }
+    .danny__head h3 {
+      font-size: clamp(1.625rem, 3vw, 2.25rem);
+      line-height: 1.1; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 26ch;
+    }
+
+    .credentials {
+      margin-top: var(--s-7);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5);
+    }
+    @media (max-width: 800px) { .credentials { grid-template-columns: 1fr; } }
+    .credential { padding: var(--s-5) 0; border-top: 1px solid var(--rule-hair); }
+    .credential__label {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50); margin-bottom: var(--s-3); display: block;
+    }
+    .credential__body { font-size: var(--t-body); line-height: 1.5; color: var(--ink); margin: 0; }
+    .credential__body strong { font-weight: 500; }
+    .credential__body em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--blueprint); }
+
+    /* CTA */
+    .cta { padding-block: var(--s-10); background: var(--ink); color: var(--cream); position: relative; overflow: hidden; }
+    .cta__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(244,239,227,0.04) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .cta .container { position: relative; }
+    .cta__head {
+      font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+      line-height: 1.02; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 18ch;
+    }
+    .cta__lede { margin-top: var(--s-5); max-width: 56ch; color: var(--on-dark-muted); font-size: var(--t-lead); line-height: 1.5; }
+    .cta__row {
+      margin-top: var(--s-7); padding-top: var(--s-6);
+      border-top: 1px solid rgba(244,239,227,0.18);
+      display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center;
+    }
+    .cta__email { margin-left: auto; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--cream); }
+    .cta__email a { color: var(--cream); border-bottom-color: rgba(244,239,227,0.4); }
+
+    /* FOOTER */
+    .footer { padding-block: var(--s-7); background: var(--blueprint-ink); color: var(--on-dark-muted); }
+    .footer__row { display: grid; grid-template-columns: 1fr auto; gap: var(--s-5); align-items: center; }
+    @media (max-width: 600px) { .footer__row { grid-template-columns: 1fr; } }
+    .footer .wordmark { color: var(--cream); }
+    .footer__legal {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      letter-spacing: var(--tk-caps); text-transform: uppercase;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-shell">
+    <div class="brand-bar"></div>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="wordmark">principl<span class="wordmark__dot"></span></a>
+        <span class="nav-tag">Studio OS · Talent + Casting + Production</span>
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--primary" style="padding: 10px 16px;">Book intro <span class="btn__arrow">→</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero__grid"></div>
+    <div class="container hero__inner">
+      <div class="hero__masthead">
+        <div class="hero__masthead-item">
+          <span class="figure-label">§ 00 — Position Statement</span>
+          <p>Studio OS</p>
+        </div>
+        <div class="hero__masthead-item">
+          <span class="figure-label">For</span>
+          <p>Talent + casting firms · → development + production</p>
+        </div>
+        <div class="hero__masthead-item">
+          <span class="figure-label">Issue</span>
+          <p>v1 · 2026</p>
+        </div>
+      </div>
+
+      <span class="eyebrow"><span class="eyebrow__num">§ 00 /</span> Studio OS · Talent + Casting + Production</span>
+      <h1 class="hero__headline" style="margin-top: var(--s-5);">Casting and relationships scale through people. Development and production scale through <em>software</em>.</h1>
+      <p class="hero__lede">A practitioner who designs and operates the connective tissue, so your team stays focused on taste and relationships — not running a tech company on top of a casting firm.</p>
+
+      <div class="hero__cta">
+        <a href="#tiers" class="btn btn--primary btn--lg">See engagement tiers <span class="btn__arrow">→</span></a>
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--outline btn--lg">Book a 30-min intro <span class="btn__arrow">→</span></a>
+        <span class="hero__cta-meta">Most engagements open within two weeks</span>
+      </div>
+
+      <div class="splitplate">
+        <div class="splitplate__cap">
+          <span class="figure-label">Plate 00 — The split</span>
+          <span class="figure-label">What scales through people · what scales through software</span>
+        </div>
+        <div class="splitplate__row">
+          <div class="splitplate__cell splitplate__cell--people">
+            <span class="figure-label">Scales through people</span>
+            <h3>Taste &amp; relationships.</h3>
+            <ul>
+              <li>Casting eye, who breaks out</li>
+              <li>Trusted relationships across the table</li>
+              <li>Pattern recognition built over years</li>
+              <li>Creative judgment on the project</li>
+            </ul>
+          </div>
+          <div class="splitplate__hinge" aria-hidden="true">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <line x1="0" y1="12" x2="68" y2="12" stroke="#0B1B2B" stroke-width="1" stroke-dasharray="3 3"/>
+              <polyline points="60,4 72,12 60,20" stroke="#C8541F" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="splitplate__cell splitplate__cell--software">
+            <span class="figure-label">Scales through software</span>
+            <h3>Workflow &amp; data.</h3>
+            <ul>
+              <li>Project pipelines &amp; packaging</li>
+              <li>Talent intelligence layer</li>
+              <li>Financier &amp; distribution tracking</li>
+              <li>Relationship CRM-of-record</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="problem__grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 01 /</span> The Problem</span>
+          <h2>The constraint isn't strategy. It's that nobody wants to run a tech company.</h2>
+        </div>
+        <div class="problem__body">
+          <p>The casting and talent business runs on decades of relationships and pattern recognition that can't be shortcut. <strong>The transition into development and production needs operational scaffolding the team didn't sign up to build.</strong></p>
+          <p>Project pipelines, talent intelligence, packaging workflows, financier and distribution tracking — most of it lives in spreadsheets, group texts, and the heads of the principals. <em class="italic">It works until it doesn't.</em></p>
+
+          <div class="problem__pull">
+            <p>Studios that try to build software end up dragging the principals into running a tech company. Wrong direction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach" id="approach">
+    <div class="container">
+      <div class="approach__head">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 02 /</span> The Approach</span>
+          <h2 style="margin-top: var(--s-5);">Four moves. The principal stays in taste.</h2>
+        </div>
+        <p>The methodology is opinionated about what software is for, and what it isn't. Anchor to the irreplaceable asset, build connective tissue (not consumer products), keep the principal in their craft, compound the relationship graph.</p>
+      </div>
+
+      <div class="moves">
+        <div class="move">
+          <span class="move__num">01</span>
+          <h3>Anchor to the irreplaceable asset.</h3>
+          <p>Your taste, your relationships, your pattern matching for who breaks out. Software exists to scale that, not replace it. We design around the principal's judgment — not around it.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">02</span>
+          <h3>Connective tissue, not consumer products.</h3>
+          <p>Workflow infrastructure for a small team that needs to operate like a much bigger one. Talent intelligence, packaging, relationship CRM. Internal tools that compound. Not apps for the open market.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">03</span>
+          <h3>The principal stays in taste.</h3>
+          <p>We run the build and the platform so the people with the eye stay focused on the work only they can do. No principal pulled into running a tech company.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">04</span>
+          <h3>Everything compounds the relationship graph.</h3>
+          <p>Every workflow feeds the same record of talent, projects, financiers, and buyers. The longer you run it, the more durable the asset. CRM-of-record for a studio — not generic SaaS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outcomes" id="outcomes">
+    <div class="outcomes__grid"></div>
+    <div class="container">
+      <div class="outcomes__head">
+        <span class="eyebrow" style="color: rgba(244,239,227,0.62);"><span class="eyebrow__num" style="color: var(--accent);">§ 03 /</span> What you walk away with</span>
+        <h2>Four artifacts. All operational. All compound.</h2>
+      </div>
+      <div class="deliverables">
+        <article class="deliverable">
+          <span class="deliverable__num">D · 01</span>
+          <div>
+            <h3>A talent intelligence layer.</h3>
+            <p>Captures the principal's pattern matching for who breaks out — and makes it visible across the team.</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 02</span>
+          <div>
+            <h3>A development &amp; packaging workflow.</h3>
+            <p>Lets a small team operate like a much bigger one. Status, decision rights, what gets packaged when.</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 03</span>
+          <div>
+            <h3>A studio-grade relationship CRM.</h3>
+            <p>Purpose-built for studio operations — talent, financiers, distribution, buyers. Not retrofitted Salesforce.</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 04</span>
+          <div>
+            <h3>A project &amp; IP tracking system.</h3>
+            <p>Survives team turnover and vendor changes. The institutional memory the firm has been carrying in heads.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tiers" id="tiers">
+    <div class="container">
+      <div class="tiers__head">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 04 /</span> Engagement Tiers</span>
+          <h2 style="margin-top: var(--s-5);">Three doors in. Same methodology behind each.</h2>
+        </div>
+        <p>Most engagements start at Activation. Discovery is the right entry when leadership wants a read before committing scope. Embedded is for studios installing across development and production in parallel.</p>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 01 — Advisory</span>
+              <span>4 weeks</span>
+            </div>
+            <h3 class="tier__name">Discovery Sprint</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$10K</span>
+              <span class="tier__price-meta">fixed · 4 wk</span>
+            </div>
+            <p class="tier__quote">Map the operational pain. Tell us what to build first, what to leave alone, and what's already working.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Includes</li>
+            <li>Operations &amp; workflow audit</li>
+            <li>Tooling &amp; vendor inventory</li>
+            <li>Prioritized build map</li>
+            <li>One-page architecture sketch</li>
+          </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--ghost" style="width: 100%; justify-content: center;">Start with Discovery <span class="btn__arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="tier tier--featured">
+          <span class="tier__pin">Most studios start here</span>
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 02 — Advisory + Build</span>
+              <span>12 weeks</span>
+            </div>
+            <h3 class="tier__name">Activation Program</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$50K</span>
+              <span class="tier__price-meta">fixed · 12 wk</span>
+            </div>
+            <p class="tier__quote">Diagnose, design, and ship the first workflow that earns its keep. Everything else compounds from there.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Everything in Discovery, plus</li>
+            <li>Principal alignment workshop</li>
+            <li>One production workflow built and live</li>
+            <li>Data model that anticipates the next three</li>
+            <li>Internal owner trained on operations</li>
+          </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--blueprint" style="width: 100%; justify-content: center; background: var(--accent); border-color: var(--accent);">Activate the program <span class="btn__arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 03 — Embedded</span>
+              <span>6 months</span>
+            </div>
+            <h3 class="tier__name">Embedded Partnership</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$100K</span>
+              <span class="tier__price-meta">fixed · 6 mo</span>
+            </div>
+            <p class="tier__quote">Operate the platform alongside the team while the connective tissue gets installed across development and production.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Everything in Activation, plus</li>
+            <li>3–5 sequenced workflow builds</li>
+            <li>Talent intelligence layer stood up</li>
+            <li>Relationship CRM operating live</li>
+            <li>Monthly principal review &amp; roadmap</li>
+          </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--ghost" style="width: 100%; justify-content: center;">Talk about embedding <span class="btn__arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <p class="t-mono muted" style="margin-top: var(--s-5); text-align: center;">All tiers fixed-fee. No hourly billing. No surprise invoices.</p>
+    </div>
+  </section>
+
+  <section class="not-doing" id="not-doing">
+    <div class="container">
+      <div class="not-doing__grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 05 /</span> What we don't do</span>
+          <h2>The shape of the work is shaped by what's outside it.</h2>
+        </div>
+        <div>
+          <ul class="not-list">
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Run your casting</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Make creative calls or pick projects</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Replace your team's judgment</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Build consumer apps that turn you into a tech company</span></li>
+          </ul>
+          <div class="not-doing__pull">
+            <p>Your principals own the taste. We own the architecture and the build.</p>
+            <p class="principal-line"><strong>Principal in taste</strong>, operator in the platform.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="danny" id="practitioner">
+    <div class="container">
+      <div class="danny__head">
+        <div class="danny__id">
+          <div class="danny__photo" aria-hidden="true">
+            <img src="/headshot.jpg" alt="" />
+          </div>
+          <div>
+            <p class="danny__name">Danny Cox</p>
+            <p class="danny__role">Studio architect · Reno / Chicago</p>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 06 /</span> The practitioner</span>
+          <h3 style="margin-top: var(--s-5);">Enterprise transformation pedigree, currently embedded operating a studio's full revenue stack.</h3>
+        </div>
+      </div>
+
+      <div class="credentials">
+        <div class="credential">
+          <span class="credential__label">Pedigree</span>
+          <p class="credential__body"><strong>Razorfish</strong> — enterprise digital transformation for <strong>Delta Air Lines</strong>, <strong>Samsung</strong>, <strong>Kellogg</strong>, <strong>Campbell's</strong>. The early playbooks for "new technology meets large org."</p>
+        </div>
+        <div class="credential">
+          <span class="credential__label">Currently embedded</span>
+          <p class="credential__body">With <strong>Rich Eisen Productions</strong>, operating ecommerce, content, and audience infrastructure on a <em>$1.2M YouTube business</em>. Studio-side, daily.</p>
+        </div>
+        <div class="credential">
+          <span class="credential__label">Academic practitioner</span>
+          <p class="credential__body">Top 1% Claude Code operator inside an active AI transformation at <strong>Ridgeline</strong>. Faculty at the <strong>University of Nevada, Reno College of Business</strong>. <strong>MBA in progress.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="cta">
+    <div class="cta__grid"></div>
+    <div class="container">
+      <span class="eyebrow" style="color: var(--on-dark-muted);"><span class="eyebrow__num" style="color: var(--accent);">§ 07 /</span> How to start</span>
+      <h2 class="cta__head" style="margin-top: var(--s-5);">A 30-minute intro to <em>scope fit</em>.</h2>
+      <p class="cta__lede">If your firm is moving from casting into development and production, and the operational scaffolding hasn't kept up — let's talk. Most engagements open within two weeks.</p>
+      <div class="cta__row">
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--blueprint btn--lg">Book the 30-min intro <span class="btn__arrow">→</span></a>
+        <span class="cta__email">Or directly — <a href="mailto:danny@principl.ai">danny@principl.ai</a></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <a href="/" class="wordmark wordmark--lg">principl<span class="wordmark__dot"></span></a>
+      <span class="footer__legal">Studio OS · Talent + Casting + Production · v1 · 2026</span>
+    </div>
+  </footer>
+</body>
+</html>

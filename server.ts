@@ -63,6 +63,10 @@ const midMarketTechHtml = await Bun.file(
   new URL("./mid-market-tech.html", import.meta.url).pathname
 ).text();
 
+const studioOsHtml = await Bun.file(
+  new URL("./studio-os.html", import.meta.url).pathname
+).text();
+
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 8080),
 
@@ -86,6 +90,12 @@ const server = Bun.serve({
 
     if (path === "/mid-market-tech" && req.method === "GET") {
       return new Response(midMarketTechHtml, {
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
+    }
+
+    if (path === "/studio-os" && req.method === "GET") {
+      return new Response(studioOsHtml, {
         headers: { "Content-Type": "text/html; charset=utf-8" },
       });
     }
