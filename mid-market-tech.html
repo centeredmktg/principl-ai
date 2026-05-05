@@ -1,596 +1,943 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Adoption Program - Mid-Market Tech</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Adoption Program · Mid-Market Tech — principl.ai</title>
+  <meta name="description" content="A facilitated program that aligns AI exploration with the strategic initiatives leadership is already accountable for. Three engagement tiers from $10K." />
   <style>
+    /* ============================================================
+       Principl — tokens
+       ============================================================ */
+
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
     :root {
-      --green: #226b03;
-      --green-light: #2a8204;
-      --green-faint: #eef4e9;
-      --ink: #111;
-      --text: #1a1a1a;
-      --text-secondary: #555;
-      --text-tertiary: #7a7a7a;
-      --surface: #fdfcfa;
-      --surface-warm: #f6f4f0;
-      --surface-deep: #efece6;
-      --border: #e2dfda;
-      --border-strong: #cfcbc2;
-      --serif: 'Instrument Serif', Georgia, serif;
-      --sans: 'Outfit', -apple-system, sans-serif;
+      --ink:           #0B1B2B;
+      --ink-90:        #11243A;
+      --ink-70:        #2A3B50;
+      --ink-50:        #5A6B80;
+      --ink-30:        #94A2B5;
+      --rule-soft:     rgba(11, 27, 43, 0.12);
+      --rule-hair:     rgba(11, 27, 43, 0.18);
+
+      --blueprint:     #1B3A6B;
+      --blueprint-deep:#0F2647;
+      --blueprint-ink: #06142B;
+
+      --cream:         #F4EFE3;
+      --cream-soft:    #EDE6D4;
+      --paper:         #FBF8F0;
+
+      --accent:        #C8541F;
+
+      --bg:            var(--cream);
+      --surface:       var(--paper);
+      --surface-2:     var(--cream-soft);
+      --text:          var(--ink);
+      --on-dark-muted: rgba(244, 239, 227, 0.62);
+
+      --font-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+
+      --t-h2:        clamp(1.875rem, 3.6vw, 3rem);
+      --t-lead:      clamp(1.125rem, 1.4vw, 1.375rem);
+      --t-body:      1.0625rem;
+      --t-small:     0.9375rem;
+      --t-mono:      0.8125rem;
+      --t-micro:     0.6875rem;
+
+      --tk-display:  -0.035em;
+      --tk-h:        -0.022em;
+      --tk-body:     -0.005em;
+      --tk-mono:     0.02em;
+      --tk-caps:     0.14em;
+
+      --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+      --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+      --s-9: 96px; --s-10: 128px;
+
+      --measure-wide:  1240px;
+      --gutter:        clamp(20px, 4vw, 48px);
+
+      --r-2: 4px; --r-pill: 999px;
+
+      --dur:      220ms;
+      --ease:     cubic-bezier(.2,.6,.2,1);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    html {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      background-color: var(--surface);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 400;
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--t-body);
       line-height: 1.55;
+      letter-spacing: var(--tk-body);
+      font-feature-settings: "ss01", "ss02", "cv11";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      z-index: 9999;
-    }
+    img, svg { display: block; max-width: 100%; }
 
-    .page {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 56px 64px 48px;
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      transition: opacity var(--dur) var(--ease);
     }
+    a:hover { opacity: 0.7; }
 
-    /* ─── Header ─── */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 32px;
+    ::selection { background: var(--blueprint); color: var(--cream); }
+
+    .t-mono { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); font-weight: 400; }
+
+    em.italic, .italic { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+
+    /* Components */
+    .container { max-width: var(--measure-wide); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+    section { padding-block: var(--s-10); }
+    @media (max-width: 720px) { section { padding-block: var(--s-9); } }
+
+    .brand-bar { height: 4px; background: var(--blueprint); position: relative; }
+    .brand-bar::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--blueprint) 0%, var(--blueprint) 64%, var(--accent) 64%, var(--accent) 68%, var(--blueprint) 68%, var(--blueprint) 100%);
     }
 
     .wordmark {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--green);
+      font-family: var(--font-sans);
+      font-weight: 500; font-size: 1.0625rem;
+      letter-spacing: -0.018em;
+      display: inline-flex; align-items: baseline; gap: 2px;
+      color: var(--ink); border: 0;
+    }
+    .wordmark__dot { width: 6px; height: 6px; display: inline-block; background: var(--accent); border-radius: 50%; margin-left: 2px; transform: translateY(-1px); }
+    .wordmark--lg { font-size: 1.5rem; }
+    .wordmark--lg .wordmark__dot { width: 8px; height: 8px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--s-3);
+      padding: 14px 22px;
+      font-family: var(--font-sans); font-size: var(--t-small); font-weight: 500;
+      letter-spacing: -0.005em;
+      border: 1px solid transparent; border-radius: var(--r-2);
+      cursor: pointer; transition: all var(--dur) var(--ease);
+      text-decoration: none; background: none; line-height: 1;
+    }
+    .btn__arrow { font-family: var(--font-mono); transition: transform var(--dur) var(--ease); }
+    .btn:hover .btn__arrow { transform: translateX(3px); }
+
+    .btn--primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .btn--primary:hover { background: var(--blueprint); border-color: var(--blueprint); opacity: 1; }
+
+    .btn--blueprint { background: var(--blueprint); color: var(--cream); border-color: var(--blueprint); }
+    .btn--blueprint:hover { background: var(--blueprint-deep); border-color: var(--blueprint-deep); opacity: 1; }
+
+    .btn--outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn--outline:hover { background: var(--ink); color: var(--cream); opacity: 1; }
+
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule-hair); }
+    .btn--ghost:hover { border-color: var(--ink); opacity: 1; }
+
+    .btn--lg { padding: 18px 28px; font-size: var(--t-body); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--s-3);
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-70); font-weight: 500;
+    }
+    .eyebrow__num { color: var(--accent); }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; display: inline-block; }
+
+    .figure-label {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50); font-weight: 500;
     }
 
-    .wordmark::before {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      margin-right: 10px;
-      vertical-align: middle;
-      position: relative;
-      top: -1px;
-    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding-block: var(--s-5); gap: var(--s-5); }
 
-    .header-meta {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-    }
+    .muted { color: var(--ink-70); }
 
-    /* ─── Hero ─── */
-    .hero {
-      margin-bottom: 36px;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 14px;
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: 44px;
-      font-weight: 400;
-      line-height: 1.05;
-      color: var(--ink);
-      margin-bottom: 14px;
+    /* Display heading italic */
+    h1 em, h2 em, h3 em {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 400;
       letter-spacing: -0.01em;
     }
 
-    .hero-sub {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 19px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      max-width: 620px;
+    /* ============================================================
+       Page-specific styles
+       ============================================================ */
+
+    .nav-shell {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(244, 239, 227, 0.86);
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .nav-shell .brand-bar { height: 3px; }
+    .line-card-tag {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-50);
+      display: inline-flex; align-items: center; gap: var(--s-2);
+    }
+    .line-card-tag::before { content: ""; width: 12px; height: 1px; background: currentColor; }
+    @media (max-width: 800px) { .line-card-tag { display: none; } }
+
+    /* HERO */
+    .hero { position: relative; padding-top: var(--s-9); padding-bottom: var(--s-9); overflow: hidden; }
+    .hero__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(11,27,43,0.045) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .hero__inner { position: relative; }
+
+    .hero__masthead {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s-5);
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    .hero__masthead-item .figure-label { display: block; margin-bottom: 6px; }
+    .hero__masthead-item p { margin: 0; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink); }
+    @media (max-width: 720px) { .hero__masthead { grid-template-columns: 1fr; gap: var(--s-3); } }
+
+    .hero__headline {
+      font-size: clamp(2.75rem, 6.4vw, 5.75rem);
+      line-height: 0.98; letter-spacing: var(--tk-display);
+      font-weight: 500; margin: 0; max-width: 17ch;
+    }
+    .hero__lede {
+      font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+      line-height: 1.5; color: var(--ink-70);
+      margin: var(--s-7) 0 0; max-width: 60ch; text-wrap: pretty;
+    }
+    .hero__cta { margin-top: var(--s-7); display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center; }
+    .hero__cta-meta { font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-50); letter-spacing: var(--tk-mono); margin-left: var(--s-4); }
+
+    .from-to { margin-top: var(--s-9); padding-top: var(--s-7); border-top: 1px solid var(--rule-hair); }
+    .from-to__cap { display: flex; justify-content: space-between; margin-bottom: var(--s-4); flex-wrap: wrap; gap: var(--s-3); }
+    .from-to__row {
+      display: grid; grid-template-columns: 1fr 80px 1fr;
+      gap: var(--s-5); align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      .from-to__row { grid-template-columns: 1fr; gap: var(--s-3); }
+      .from-to__arrow { display: none !important; }
+    }
+    .from-to__cell {
+      padding: var(--s-6);
+      background: var(--paper);
+      border: 1px solid var(--rule-hair);
+      border-radius: var(--r-2);
+      min-height: 160px;
+      display: flex; flex-direction: column; gap: var(--s-3);
+    }
+    .from-to__cell--from { background: var(--cream-soft); }
+    .from-to__cell--to { border-color: var(--blueprint); border-width: 1.5px; position: relative; }
+    .from-to__cell .figure-label { color: var(--ink-50); }
+    .from-to__cell--to .figure-label { color: var(--blueprint); }
+    .from-to__cell h3 {
+      font-size: 1.5rem;
+      line-height: 1.15; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0;
+    }
+    .from-to__cell ul {
+      margin: var(--s-3) 0 0; padding: 0; list-style: none;
+      display: grid; gap: var(--s-2);
+    }
+    .from-to__cell li {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-70);
+      padding-left: 16px; position: relative;
+    }
+    .from-to__cell li::before { content: "—"; position: absolute; left: 0; color: var(--ink-30); }
+    .from-to__cell--to li::before { color: var(--accent); }
+
+    .from-to__arrow { display: flex; align-items: center; justify-content: center; position: relative; }
+    .from-to__arrow svg { width: 100%; height: 24px; }
+
+    /* PROBLEM */
+    .problem {
+      padding-block: var(--s-9);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
+    }
+    .problem__grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--s-9); align-items: start; }
+    @media (max-width: 900px) { .problem__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
+    .problem h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-3) 0 0; max-width: 16ch;
+    }
+    .problem__body p { margin: 0; font-size: var(--t-lead); line-height: 1.55; color: var(--ink-70); }
+    .problem__body p strong { color: var(--ink); font-weight: 500; }
+    .problem__body p + p { margin-top: var(--s-5); }
+    .problem__symptoms {
+      margin-top: var(--s-6); padding-top: var(--s-5);
+      border-top: 1px solid var(--rule-hair);
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-4);
+    }
+    @media (max-width: 600px) { .problem__symptoms { grid-template-columns: 1fr; } }
+    .symptom { display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3); align-items: baseline; }
+    .symptom__num { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink-30); }
+    .symptom__text { font-size: var(--t-small); line-height: 1.5; color: var(--ink-70); }
+
+    /* APPROACH */
+    .approach { padding-block: var(--s-10); }
+    .approach__head {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s-7); align-items: end;
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    @media (max-width: 800px) { .approach__head { grid-template-columns: 1fr; } }
+    .approach__head h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.05; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 18ch;
+    }
+    .approach__head p {
+      font-size: var(--t-lead); line-height: 1.5;
+      color: var(--ink-70); margin: 0; max-width: 48ch;
     }
 
-    /* ─── Section ─── */
-    section {
-      margin-bottom: 30px;
+    .moves {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      border-left: 1px solid var(--rule-hair);
+    }
+    @media (max-width: 1024px) { .moves { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .moves { grid-template-columns: 1fr; } }
+    .move {
+      padding: var(--s-6) var(--s-5) var(--s-7);
+      border-right: 1px solid var(--rule-hair);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
+      position: relative; min-height: 280px;
+      display: flex; flex-direction: column;
+    }
+    .move__num {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--accent);
+      margin-bottom: var(--s-7);
+    }
+    .move h3 {
+      font-size: 1.25rem; line-height: 1.2;
+      letter-spacing: var(--tk-h); font-weight: 500;
+      margin: 0 0 var(--s-3);
+    }
+    .move p {
+      font-size: var(--t-small); line-height: 1.55;
+      color: var(--ink-70); margin: 0; text-wrap: pretty;
     }
 
-    .section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
+    /* OUTCOMES */
+    .outcomes {
+      padding-block: var(--s-10);
+      background: var(--blueprint-ink); color: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .outcomes__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(244,239,227,0.05) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .outcomes .container { position: relative; }
+    .outcomes__head { max-width: 22ch; margin-bottom: var(--s-7); }
+    .outcomes__head h2 {
+      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-5) 0 0;
+    }
+    .deliverables {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+      background: rgba(244,239,227,0.18);
+      border: 1px solid rgba(244,239,227,0.18);
+    }
+    @media (max-width: 800px) { .deliverables { grid-template-columns: 1fr; } }
+    .deliverable {
+      padding: var(--s-6); background: var(--blueprint-ink);
+      display: grid; grid-template-columns: 60px 1fr; gap: var(--s-4);
+    }
+    .deliverable__num {
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--accent);
+    }
+    .deliverable h3 {
+      font-size: 1.125rem; line-height: 1.25;
+      letter-spacing: -0.012em; font-weight: 500;
+      margin: 0 0 var(--s-2);
+    }
+    .deliverable p {
+      font-size: var(--t-small); line-height: 1.5;
+      margin: 0; color: rgba(244,239,227,0.62);
     }
 
-    .problem-statement {
-      font-family: var(--serif);
-      font-size: 18px;
-      line-height: 1.5;
-      color: var(--text);
-      max-width: 760px;
+    /* TIERS */
+    .tiers { padding-block: var(--s-10); }
+    .tiers__head {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s-7); align-items: end;
+      padding-bottom: var(--s-6); border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-7);
+    }
+    @media (max-width: 800px) { .tiers__head { grid-template-columns: 1fr; } }
+    .tiers__head h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 18ch;
+    }
+    .tiers__head p {
+      font-size: var(--t-lead); line-height: 1.5;
+      color: var(--ink-70); margin: 0; max-width: 48ch;
     }
 
-    .problem-statement strong {
-      font-family: var(--sans);
-      font-weight: 600;
-      color: var(--green);
-      font-size: 16px;
-      letter-spacing: 0.01em;
-    }
-
-    /* ─── Approach (4 principles) ─── */
-    .approach-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 28px;
-    }
-
-    .principle {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .principle-num {
-      font-family: var(--serif);
-      font-size: 26px;
-      color: var(--green);
-      line-height: 1;
-      min-width: 28px;
-      padding-top: 2px;
-    }
-
-    .principle-body h4 {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
-      letter-spacing: 0.005em;
-    }
-
-    .principle-body p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* ─── Outcomes ─── */
-    .outcomes-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
-    }
-
-    .outcomes-list li {
-      font-size: 13px;
-      color: var(--text);
-      padding-left: 22px;
-      position: relative;
-      line-height: 1.5;
-    }
-
-    .outcomes-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    /* ─── Tiers ─── */
-    .tiers {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 14px;
-      margin-top: 8px;
-    }
+    .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+    @media (max-width: 1024px) { .tier-grid { grid-template-columns: 1fr; } }
 
     .tier {
-      background: var(--surface-warm);
-      border: 1px solid var(--border);
-      padding: 18px 18px 20px;
-      border-radius: 2px;
-      display: flex;
-      flex-direction: column;
+      background: var(--paper); border: 1px solid var(--rule-hair);
+      border-radius: var(--r-2); padding: var(--s-6);
+      display: flex; flex-direction: column; position: relative;
     }
-
-    .tier.featured {
-      background: var(--green-faint);
-      border-color: var(--green-light);
-      position: relative;
+    .tier--featured { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+    .tier__pin {
+      position: absolute; top: -10px; right: var(--s-5);
+      background: var(--accent); color: var(--cream);
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      padding: 4px 10px; border-radius: var(--r-2);
     }
-
-    .tier.featured::after {
-      content: 'MOST COMMON';
-      position: absolute;
-      top: -8px;
-      right: 12px;
-      background: var(--green);
-      color: white;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      padding: 2px 8px;
-      border-radius: 1px;
+    .tier__head {
+      padding-bottom: var(--s-5);
+      border-bottom: 1px solid var(--rule-hair);
+      margin-bottom: var(--s-5);
     }
-
-    .tier-name {
-      font-family: var(--serif);
-      font-size: 22px;
-      color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 4px;
+    .tier--featured .tier__head { border-bottom-color: rgba(244,239,227,0.18); }
+    .tier__code {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50);
+      display: flex; justify-content: space-between;
     }
-
-    .tier-meta {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 12px;
+    .tier--featured .tier__code { color: rgba(244,239,227,0.5); }
+    .tier__name {
+      font-size: 1.625rem; line-height: 1.1;
+      letter-spacing: var(--tk-h); font-weight: 500;
+      margin: var(--s-3) 0 var(--s-3);
     }
+    .tier__price { display: flex; align-items: baseline; gap: var(--s-3); margin-bottom: var(--s-3); }
+    .tier__price-num { font-size: 2.25rem; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+    .tier--featured .tier__price-num { color: var(--cream); }
+    .tier__price-meta { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink-50); }
+    .tier--featured .tier__price-meta { color: rgba(244,239,227,0.62); }
 
-    .tier-price {
-      font-family: var(--sans);
-      font-size: 28px;
-      font-weight: 600;
-      color: var(--green);
-      line-height: 1;
-      margin-bottom: 2px;
+    .tier__quote {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 1.0625rem; line-height: 1.45;
+      color: var(--ink-70); margin: 0; text-wrap: pretty;
     }
+    .tier--featured .tier__quote { color: rgba(244,239,227,0.86); }
+    .tier__quote::before { content: "\201C"; }
+    .tier__quote::after { content: "\201D"; }
 
-    .tier-duration {
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-bottom: 14px;
+    .tier__includes {
+      list-style: none; padding: 0; margin: 0;
+      flex: 1; display: grid; gap: var(--s-3);
     }
-
-    .tier-tagline {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+    .tier__includes li {
+      font-size: var(--t-small); line-height: 1.45;
+      padding-left: 18px; position: relative; color: var(--ink-70);
     }
-
-    .tier-includes {
-      list-style: none;
-      flex: 1;
+    .tier--featured .tier__includes li { color: rgba(244,239,227,0.86); }
+    .tier__includes li::before {
+      content: "+"; position: absolute; left: 0; top: 0;
+      font-family: var(--font-mono); color: var(--accent); font-weight: 500;
     }
-
-    .tier-includes li {
-      font-size: 11.5px;
-      color: var(--text);
-      padding: 4px 0 4px 16px;
-      position: relative;
-      line-height: 1.4;
+    .tier__includes li.is-meta {
+      padding-left: 0;
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      letter-spacing: var(--tk-caps); text-transform: uppercase;
+      color: var(--ink-50);
+      border-bottom: 1px solid var(--rule-hair);
+      padding-bottom: var(--s-3);
     }
-
-    .tier-includes li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      top: 4px;
-      color: var(--green);
-      font-weight: 600;
-      font-size: 11px;
+    .tier--featured .tier__includes li.is-meta {
+      color: rgba(244,239,227,0.5);
+      border-bottom-color: rgba(244,239,227,0.18);
     }
+    .tier__includes li.is-meta::before { content: ""; }
 
-    /* ─── Bottom row ─── */
-    .bottom-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin-top: 8px;
-    }
+    .tier__cta { margin-top: var(--s-6); }
 
+    /* NOT-DOING */
     .not-doing {
-      background: var(--surface-deep);
-      border-left: 3px solid var(--ink);
-      padding: 14px 18px;
+      padding-block: var(--s-10);
+      background: var(--surface-2);
+      border-top: 1px solid var(--rule-hair);
+      border-bottom: 1px solid var(--rule-hair);
     }
-
-    .not-doing-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink);
-      margin-bottom: 6px;
+    .not-doing__grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--s-9); align-items: start; }
+    @media (max-width: 900px) { .not-doing__grid { grid-template-columns: 1fr; gap: var(--s-6); } }
+    .not-doing h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: var(--s-3) 0 0; max-width: 14ch;
     }
-
-    .not-doing-text {
-      font-size: 12.5px;
-      color: var(--text);
-      line-height: 1.5;
+    .not-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .not-list li {
+      display: grid; grid-template-columns: 32px 1fr; gap: var(--s-3);
+      align-items: baseline;
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--rule-hair);
     }
-
-    .not-doing-text strong {
-      font-weight: 600;
-    }
-
-    .credibility {
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: var(--text);
-    }
-
-    .credibility .name {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 16px;
-      color: var(--ink);
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    /* ─── Footer / CTA ─── */
-    .footer {
-      margin-top: 36px;
-      padding-top: 22px;
+    .not-list li:first-child { border-top: 1px solid var(--rule-hair); }
+    .not-list__mark { font-family: var(--font-mono); color: var(--ink-30); font-size: 1.125rem; line-height: 1; }
+    .not-list__text { font-size: 1.125rem; line-height: 1.4; color: var(--ink); }
+    .not-doing__pull {
+      margin-top: var(--s-7); padding-top: var(--s-6);
       border-top: 2px solid var(--ink);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
+    }
+    .not-doing__pull p {
+      font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+      line-height: 1.15; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 24ch;
+    }
+    .miyagi {
+      margin-top: var(--s-5);
+      font-family: var(--font-mono); font-size: var(--t-mono);
+      letter-spacing: var(--tk-mono); color: var(--ink-50);
+    }
+    .miyagi strong { color: var(--accent); font-weight: 500; }
+
+    /* DANNY */
+    .danny { padding-block: var(--s-10); }
+    .danny__head {
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: var(--s-7); align-items: start;
+      padding-bottom: var(--s-7); border-bottom: 1px solid var(--rule-hair);
+    }
+    @media (max-width: 800px) { .danny__head { grid-template-columns: 1fr; } }
+    .danny__id { display: grid; grid-template-columns: 96px 1fr; gap: var(--s-4); align-items: center; }
+    .danny__photo {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: var(--blueprint); color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-sans); font-weight: 500; font-size: 32px;
+      letter-spacing: -0.02em;
+      box-shadow: 0 0 0 4px var(--cream), 0 0 0 5px var(--accent);
+      overflow: hidden;
+    }
+    .danny__photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .danny__name { font-size: 1.5rem; line-height: 1.1; letter-spacing: var(--tk-h); font-weight: 500; margin: 0; }
+    .danny__role { margin: 4px 0 0; font-family: var(--font-mono); font-size: var(--t-mono); color: var(--ink-50); letter-spacing: var(--tk-mono); }
+    .danny__head h3 {
+      font-size: clamp(1.625rem, 3vw, 2.25rem);
+      line-height: 1.1; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 26ch;
     }
 
-    .cta-block .cta-eyebrow {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 6px;
+    .credentials {
+      margin-top: var(--s-7);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5);
     }
-
-    .cta-block .cta-text {
-      font-family: var(--serif);
-      font-size: 18px;
-      color: var(--ink);
-      line-height: 1.35;
-      max-width: 380px;
+    @media (max-width: 800px) { .credentials { grid-template-columns: 1fr; } }
+    .credential { padding: var(--s-5) 0; border-top: 1px solid var(--rule-hair); }
+    .credential__label {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      text-transform: uppercase; letter-spacing: var(--tk-caps);
+      color: var(--ink-50); margin-bottom: var(--s-3); display: block;
     }
+    .credential__body { font-size: var(--t-body); line-height: 1.5; color: var(--ink); margin: 0; }
+    .credential__body strong { font-weight: 500; }
+    .credential__body em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--blueprint); }
 
-    .contact {
+    /* CTA */
+    .cta { padding-block: var(--s-10); background: var(--ink); color: var(--cream); position: relative; overflow: hidden; }
+    .cta__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(to right, rgba(244,239,227,0.04) 1px, transparent 1px);
+      background-size: calc((100vw - 2 * var(--gutter)) / 12) 100%;
+      background-position: var(--gutter) 0;
+    }
+    .cta .container { position: relative; }
+    .cta__head {
+      font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+      line-height: 1.02; letter-spacing: var(--tk-h);
+      font-weight: 500; margin: 0; max-width: 18ch;
+    }
+    .cta__lede { margin-top: var(--s-5); max-width: 56ch; color: var(--on-dark-muted); font-size: var(--t-lead); line-height: 1.5; }
+    .cta__row {
+      margin-top: var(--s-7); padding-top: var(--s-6);
+      border-top: 1px solid rgba(244,239,227,0.18);
+      display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center;
+    }
+    .cta__email { margin-left: auto; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--cream); }
+    .cta__email a { color: var(--cream); border-bottom-color: rgba(244,239,227,0.4); }
+
+    /* FOOTER */
+    .footer { padding-block: var(--s-7); background: var(--blueprint-ink); color: var(--on-dark-muted); }
+    .footer__row { display: grid; grid-template-columns: 1fr auto; gap: var(--s-5); align-items: center; }
+    @media (max-width: 600px) { .footer__row { grid-template-columns: 1fr; } }
+    .footer .wordmark { color: var(--cream); }
+    .footer__legal {
+      font-family: var(--font-mono); font-size: var(--t-micro);
+      letter-spacing: var(--tk-caps); text-transform: uppercase;
       text-align: right;
-      font-size: 12px;
-      line-height: 1.65;
-      color: var(--text-secondary);
-    }
-
-    .contact .contact-name {
-      font-family: var(--serif);
-      font-size: 16px;
-      color: var(--ink);
-      display: block;
-    }
-
-    .contact a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    /* ─── Print ─── */
-    @page {
-      size: letter;
-      margin: 0.4in;
-    }
-
-    @media print {
-      body { background: white; }
-      body::before { display: none; }
-      .page { padding: 0; max-width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-
-    <!-- Header -->
-    <header class="header">
-      <div class="wordmark">Principl</div>
-      <div class="header-meta">Line Card · AI Adoption Program</div>
-    </header>
-
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-eyebrow">For mid-market tech companies</div>
-      <h1 class="hero-title">From AI for AI's sake<br>to AI as strategic infrastructure.</h1>
-      <p class="hero-sub">A facilitated program that aligns your AI exploration with the strategic initiatives leadership is already accountable for — and gives your team the structure to make it compound.</p>
+  <div class="nav-shell">
+    <div class="brand-bar"></div>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="wordmark">principl<span class="wordmark__dot"></span></a>
+        <span class="line-card-tag">Position Statement · AI Adoption Program · Mid-Market Tech</span>
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--primary" style="padding: 10px 16px;">Book intro <span class="btn__arrow">→</span></a>
+      </nav>
     </div>
+  </div>
 
-    <!-- Problem -->
-    <section>
-      <div class="section-label">The Problem</div>
-      <p class="problem-statement">
-        Your team is experimenting with AI. Pockets of power-users, scattered tool subscriptions, the occasional internal demo. <strong>None of it tied to the strategic initiatives leadership is actually accountable for.</strong> Motion without progress, cost without ROI, no path from "playing with AI" to "AI is changing how we operate." The fix isn't more tools — it's a program.
-      </p>
-    </section>
+  <section class="hero">
+    <div class="hero__grid"></div>
+    <div class="container hero__inner">
+      <div class="hero__masthead">
+        <div class="hero__masthead-item">
+          <span class="figure-label">§ 00 — Position Statement</span>
+          <p>AI Adoption Program</p>
+        </div>
+        <div class="hero__masthead-item">
+          <span class="figure-label">For</span>
+          <p>Mid-market tech companies</p>
+        </div>
+        <div class="hero__masthead-item">
+          <span class="figure-label">Issue</span>
+          <p>v1 · 2026</p>
+        </div>
+      </div>
 
-    <!-- Approach (the new hero) -->
-    <section>
-      <div class="section-label">The Approach</div>
-      <div class="approach-grid">
-        <div class="principle">
-          <div class="principle-num">01</div>
-          <div class="principle-body">
-            <h4>Anchor to existing strategic initiatives</h4>
-            <p>We don't pitch AI strategy in a vacuum. Every recommendation maps to OKRs and roadmap items leadership already owns.</p>
-          </div>
+      <span class="eyebrow"><span class="eyebrow__num">§ 00 /</span> Position Statement · Mid-Market Tech</span>
+      <h1 class="hero__headline" style="margin-top: var(--s-5);">From AI for AI's sake to AI as <em>strategic infrastructure</em>.</h1>
+      <p class="hero__lede">A facilitated program that aligns your AI exploration with the strategic initiatives leadership is already accountable for — and gives your team the structure to make it compound.</p>
+
+      <div class="hero__cta">
+        <a href="#tiers" class="btn btn--primary btn--lg">See engagement tiers <span class="btn__arrow">→</span></a>
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--outline btn--lg">Book a 30-min intro <span class="btn__arrow">→</span></a>
+        <span class="hero__cta-meta">Most engagements open within two weeks</span>
+      </div>
+
+      <div class="from-to">
+        <div class="from-to__cap">
+          <span class="figure-label">Plate 00 — Trajectory</span>
+          <span class="figure-label">From scattered exploration → strategic infrastructure</span>
         </div>
-        <div class="principle">
-          <div class="principle-num">02</div>
-          <div class="principle-body">
-            <h4>Discovery before structure, structure before execution</h4>
-            <p>Most rollouts skip the diagnosis. We map current state, opportunity, and bottlenecks before designing anything.</p>
+        <div class="from-to__row">
+          <div class="from-to__cell from-to__cell--from">
+            <span class="figure-label">Today · current state</span>
+            <h3>Pockets of power-users.</h3>
+            <ul>
+              <li>Scattered tool subscriptions</li>
+              <li>Occasional internal demo</li>
+              <li>No tie to OKRs</li>
+              <li>Cost without ROI</li>
+            </ul>
           </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">03</div>
-          <div class="principle-body">
-            <h4>The COE is the accelerator</h4>
-            <p>A well-designed Center of Excellence turns scattered exploration into compound returns. We design yours for your org — not from a template.</p>
+          <div class="from-to__arrow" aria-hidden="true">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <line x1="0" y1="12" x2="68" y2="12" stroke="#0B1B2B" stroke-width="1" stroke-dasharray="3 3"/>
+              <polyline points="60,4 72,12 60,20" stroke="#C8541F" stroke-width="1.5" fill="none"/>
+            </svg>
           </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">04</div>
-          <div class="principle-body">
-            <h4>Your team owns it, end to end</h4>
-            <p>We're the program architect and change-management coach — not a build shop, not an agency that disappears with the playbook.</p>
+          <div class="from-to__cell from-to__cell--to">
+            <span class="figure-label">Target · 12 weeks out</span>
+            <h3>A program that compounds.</h3>
+            <ul>
+              <li>Sanctioned exploration framework</li>
+              <li>Center of Excellence stood up</li>
+              <li>First pilot launched on an OKR</li>
+              <li>Internal lead owning it</li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Outcomes -->
-    <section>
-      <div class="section-label">What You Walk Away With</div>
-      <ul class="outcomes-list">
-        <li>A prioritized opportunity map tied to your existing strategic priorities</li>
-        <li>A sanctioned exploration framework your team can run on day one</li>
-        <li>A Center of Excellence structure designed for your org, ready to staff</li>
-        <li>An internal program lead prepared to own ongoing execution</li>
-      </ul>
-    </section>
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="problem__grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 01 /</span> The Problem</span>
+          <h2>Motion. But not progress.</h2>
+        </div>
+        <div class="problem__body">
+          <p>Your team is experimenting with AI. Pockets of power-users, scattered tool subscriptions, the occasional internal demo. <strong>None of it tied to the strategic initiatives leadership is actually accountable for.</strong></p>
+          <p>Motion without progress, cost without ROI, no path from <em class="italic">"playing with AI"</em> to <em class="italic">"AI is changing how we operate."</em> The fix isn't more tools — it's a program.</p>
 
-    <!-- Tiers -->
-    <section>
-      <div class="section-label">Engagement Tiers</div>
-      <div class="tiers">
+          <div class="problem__symptoms">
+            <div class="symptom"><span class="symptom__num">i.</span><span class="symptom__text">Champions burning cycles on demos no one greenlights</span></div>
+            <div class="symptom"><span class="symptom__num">ii.</span><span class="symptom__text">Six SaaS subscriptions, none of them governed</span></div>
+            <div class="symptom"><span class="symptom__num">iii.</span><span class="symptom__text">A board that's started asking "what's our AI story?"</span></div>
+            <div class="symptom"><span class="symptom__num">iv.</span><span class="symptom__text">Pilots that run, then quietly stop, with nothing carried over</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section class="approach" id="approach">
+    <div class="container">
+      <div class="approach__head">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 02 /</span> The Approach</span>
+          <h2 style="margin-top: var(--s-5);">Four moves. In order. No skipping.</h2>
+        </div>
+        <p>The program is opinionated about sequence. Anchor before structure, structure before execution, and the COE last — not first. Skip a step and the rest stops compounding.</p>
+      </div>
+
+      <div class="moves">
+        <div class="move">
+          <span class="move__num">01</span>
+          <h3>Anchor to existing strategic initiatives.</h3>
+          <p>We don't pitch AI strategy in a vacuum. Every recommendation maps to OKRs and roadmap items leadership already owns.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">02</span>
+          <h3>Discovery before structure, structure before execution.</h3>
+          <p>Most rollouts skip the diagnosis. We map current state, opportunity, and bottlenecks before designing anything.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">03</span>
+          <h3>The COE is the accelerator.</h3>
+          <p>A well-designed Center of Excellence turns scattered exploration into compound returns. We design yours for your org — not from a template.</p>
+        </div>
+        <div class="move">
+          <span class="move__num">04</span>
+          <h3>Your team owns it, end to end.</h3>
+          <p>We're the program architect and change-management coach — not a build shop, not an agency that disappears with the playbook.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outcomes" id="outcomes">
+    <div class="outcomes__grid"></div>
+    <div class="container">
+      <div class="outcomes__head">
+        <span class="eyebrow" style="color: rgba(244,239,227,0.62);"><span class="eyebrow__num" style="color: var(--accent);">§ 03 /</span> What you walk away with</span>
+        <h2>Four artifacts. All operational. None in a binder.</h2>
+      </div>
+      <div class="deliverables">
+        <article class="deliverable">
+          <span class="deliverable__num">D · 01</span>
+          <div>
+            <h3>A prioritized opportunity map.</h3>
+            <p>Tied to your existing strategic priorities — not a generic AI use-case catalog.</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 02</span>
+          <div>
+            <h3>A sanctioned exploration framework.</h3>
+            <p>Your team can run it on day one. Decision rights, guardrails, definitions of "done."</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 03</span>
+          <div>
+            <h3>A Center of Excellence structure.</h3>
+            <p>Designed for your org, ready to staff. Not a template; the structure follows your operating model.</p>
+          </div>
+        </article>
+        <article class="deliverable">
+          <span class="deliverable__num">D · 04</span>
+          <div>
+            <h3>An internal program lead.</h3>
+            <p>Prepared to own ongoing execution after we leave. Coached, not credentialed.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tiers" id="tiers">
+    <div class="container">
+      <div class="tiers__head">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 04 /</span> Engagement Tiers</span>
+          <h2 style="margin-top: var(--s-5);">Three doors in. Same methodology behind each.</h2>
+        </div>
+        <p>Most teams start at Activation. Discovery is the right entry when leadership wants a read before committing scope. Embedded is for orgs running multiple initiatives in parallel.</p>
+      </div>
+
+      <div class="tier-grid">
         <div class="tier">
-          <div class="tier-name">Discovery Sprint</div>
-          <div class="tier-meta">Advisory</div>
-          <div class="tier-price">$10K</div>
-          <div class="tier-duration">4 weeks</div>
-          <p class="tier-tagline">"Tell us where to start, what's going to block us, and how to structure exploration."</p>
-          <ul class="tier-includes">
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 01 — Advisory</span>
+              <span>4 weeks</span>
+            </div>
+            <h3 class="tier__name">Discovery Sprint</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$10K</span>
+              <span class="tier__price-meta">fixed · 4 wk</span>
+            </div>
+            <p class="tier__quote">Tell us where to start, what's going to block us, and how to structure exploration.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Includes</li>
             <li>Discovery + opportunity map</li>
-            <li>Systems & bottlenecks audit</li>
+            <li>Systems &amp; bottlenecks audit</li>
             <li>Exploration framework</li>
             <li>COE model design</li>
           </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--ghost" style="width: 100%; justify-content: center;">Start with Discovery <span class="btn__arrow">→</span></a>
+          </div>
         </div>
 
-        <div class="tier">
-          <div class="tier-name">Activation Program</div>
-          <div class="tier-meta">Advisory + Facilitation</div>
-          <div class="tier-price">$50K</div>
-          <div class="tier-duration">12 weeks</div>
-          <p class="tier-tagline">"Diagnose, design, and stand the program up. Run our first pilot together."</p>
-          <ul class="tier-includes">
-            <li>Everything in Discovery Sprint</li>
+        <div class="tier tier--featured">
+          <span class="tier__pin">Most teams start here</span>
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 02 — Advisory + Facilitation</span>
+              <span>12 weeks</span>
+            </div>
+            <h3 class="tier__name">Activation Program</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$50K</span>
+              <span class="tier__price-meta">fixed · 12 wk</span>
+            </div>
+            <p class="tier__quote">Diagnose, design, and stand the program up. Run our first pilot together.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Everything in Discovery, plus</li>
             <li>Executive alignment workshop</li>
             <li>COE stood up + first charter</li>
             <li>First pilot designed + launched with internal lead</li>
+            <li>Weekly working sessions</li>
           </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--blueprint" style="width: 100%; justify-content: center; background: var(--accent); border-color: var(--accent);">Activate the program <span class="btn__arrow">→</span></a>
+          </div>
         </div>
 
         <div class="tier">
-          <div class="tier-name">Embedded Partnership</div>
-          <div class="tier-meta">Embedded</div>
-          <div class="tier-price">$100K</div>
-          <div class="tier-duration">6 months</div>
-          <p class="tier-tagline">"Guided implementation across multiple initiatives, until your operating model is self-running."</p>
-          <ul class="tier-includes">
-            <li>Everything in Activation Program</li>
-            <li>3–5 strategic-initiative pilots sequenced</li>
+          <div class="tier__head">
+            <div class="tier__code">
+              <span>TIER 03 — Embedded</span>
+              <span>6 months</span>
+            </div>
+            <h3 class="tier__name">Embedded Partnership</h3>
+            <div class="tier__price">
+              <span class="tier__price-num">$100K</span>
+              <span class="tier__price-meta">fixed · 6 mo</span>
+            </div>
+            <p class="tier__quote">Guided implementation across multiple initiatives, until your operating model is self-running.</p>
+          </div>
+          <ul class="tier__includes">
+            <li class="is-meta">Everything in Activation, plus</li>
+            <li>3–5 strategic-initiative pilots, sequenced</li>
             <li>Monthly COE governance reviews</li>
             <li>Quarterly leadership business review</li>
             <li>Outcome measurement framework</li>
           </ul>
+          <div class="tier__cta">
+            <a href="https://meetings.hubspot.com/danny482" class="btn btn--ghost" style="width: 100%; justify-content: center;">Talk about embedding <span class="btn__arrow">→</span></a>
+          </div>
         </div>
-
-      </div>
-    </section>
-
-    <!-- Bottom row: scope guardrail + credibility -->
-    <div class="bottom-row">
-      <div class="not-doing">
-        <div class="not-doing-label">What we don't do</div>
-        <p class="not-doing-text">
-          Build your tools. Pick your stack. Run your pilots without your people. Take ownership of the COE long-term. <strong>Your people own execution.</strong> We're the program architect and change-management coach. Miyagi, not mechanic.
-        </p>
       </div>
 
-      <div class="credibility">
-        <span class="name">Danny Cox</span>
-        Enterprise digital transformation pedigree (Razorfish — Delta Air Lines, Samsung, Google). Currently inside an active AI transformation at Ridgeline as a top 1% Claude Code operator. Faculty at the University of Nevada, Reno College of Business; MBA in progress. The methodology runs in live engagements and gets taught — pressure-tested in both directions.
+      <p class="t-mono muted" style="margin-top: var(--s-5); text-align: center;">All tiers fixed-fee. No hourly billing. No surprise invoices.</p>
+    </div>
+  </section>
+
+  <section class="not-doing" id="not-doing">
+    <div class="container">
+      <div class="not-doing__grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 05 /</span> What we don't do</span>
+          <h2>The shape of the work is shaped by what's outside it.</h2>
+        </div>
+        <div>
+          <ul class="not-list">
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Build your tools</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Pick your stack</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Run your pilots without your people</span></li>
+            <li><span class="not-list__mark">✕</span><span class="not-list__text">Take ownership of the COE long-term</span></li>
+          </ul>
+          <div class="not-doing__pull">
+            <p>Your people own execution. We're the program architect and change-management coach.</p>
+            <p class="miyagi"><strong>Miyagi</strong>, not mechanic.</p>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Footer / CTA -->
-    <footer class="footer">
-      <div class="cta-block">
-        <div class="cta-eyebrow">How to start</div>
-        <p class="cta-text">A 30-minute intro to scope fit. Most engagements open within two weeks.</p>
+  <section class="danny" id="practitioner">
+    <div class="container">
+      <div class="danny__head">
+        <div class="danny__id">
+          <div class="danny__photo" aria-hidden="true">
+            <img src="/headshot.jpg" alt="" />
+          </div>
+          <div>
+            <p class="danny__name">Danny Cox</p>
+            <p class="danny__role">Program architect · Reno / Chicago</p>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow"><span class="eyebrow__num">§ 06 /</span> The practitioner</span>
+          <h3 style="margin-top: var(--s-5);">Enterprise digital transformation pedigree, sharpened by an active AI rollout he's running right now.</h3>
+        </div>
       </div>
-      <div class="contact">
-        <span class="contact-name">Danny Cox</span>
-        <a href="mailto:danny@principl.ai">danny@principl.ai</a><br>
-        <a href="https://principl.ai">principl.ai</a>
-      </div>
-    </footer>
 
-  </div>
+      <div class="credentials">
+        <div class="credential">
+          <span class="credential__label">Pedigree</span>
+          <p class="credential__body"><strong>Razorfish</strong> — enterprise digital transformation for <strong>Delta Air Lines</strong>, <strong>Samsung</strong>, <strong>Google</strong>. The early playbooks for "new technology meets large org."</p>
+        </div>
+        <div class="credential">
+          <span class="credential__label">Currently inside</span>
+          <p class="credential__body">An active AI transformation at <strong>Ridgeline</strong>, where he's a <em>top 1% Claude Code operator</em>. Not advising on AI from the outside — operating inside it daily.</p>
+        </div>
+        <div class="credential">
+          <span class="credential__label">Academic practitioner</span>
+          <p class="credential__body">Faculty at the <strong>University of Nevada, Reno College of Business</strong>. <strong>MBA in progress.</strong> The methodology runs in live engagements <em>and</em> gets taught — pressure-tested in both directions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="cta">
+    <div class="cta__grid"></div>
+    <div class="container">
+      <span class="eyebrow" style="color: var(--on-dark-muted);"><span class="eyebrow__num" style="color: var(--accent);">§ 07 /</span> How to start</span>
+      <h2 class="cta__head" style="margin-top: var(--s-5);">A 30-minute intro to <em>scope fit</em>.</h2>
+      <p class="cta__lede">If your team is past the experimentation phase and leadership wants a program — not another tool — let's talk. Most engagements open within two weeks.</p>
+      <div class="cta__row">
+        <a href="https://meetings.hubspot.com/danny482" class="btn btn--blueprint btn--lg">Book the 30-min intro <span class="btn__arrow">→</span></a>
+        <span class="cta__email">Or directly — <a href="mailto:danny@principl.ai">danny@principl.ai</a></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <a href="/" class="wordmark wordmark--lg">principl<span class="wordmark__dot"></span></a>
+      <span class="footer__legal">Position Statement · AI Adoption · Mid-Market Tech · v1 · 2026</span>
+    </div>
+  </footer>
 </body>
 </html>
