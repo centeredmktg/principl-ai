@@ -51,21 +51,23 @@ async function handleApply(req: Request): Promise<Response> {
   }
 }
 
-const homepageHtml = await Bun.file(
-  new URL("./homepage.html", import.meta.url).pathname
+// Analytics partial — injected before </body> on every HTML page.
+// Edit partials/analytics.html to add or change tracking scripts.
+const analyticsHtml = await Bun.file(
+  new URL("./partials/analytics.html", import.meta.url).pathname
 ).text();
 
-const revenueResidencyHtml = await Bun.file(
-  new URL("./revenue-residency.html", import.meta.url).pathname
-).text();
+async function loadPage(filename: string): Promise<string> {
+  const html = await Bun.file(
+    new URL(`./${filename}`, import.meta.url).pathname
+  ).text();
+  return html.replace("</body>", `${analyticsHtml}\n</body>`);
+}
 
-const midMarketTechHtml = await Bun.file(
-  new URL("./mid-market-tech.html", import.meta.url).pathname
-).text();
-
-const studioOsHtml = await Bun.file(
-  new URL("./studio-os.html", import.meta.url).pathname
-).text();
+const homepageHtml = await loadPage("homepage.html");
+const revenueResidencyHtml = await loadPage("revenue-residency.html");
+const midMarketTechHtml = await loadPage("mid-market-tech.html");
+const studioOsHtml = await loadPage("studio-os.html");
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 8080),
