@@ -53,15 +53,40 @@ async function handleApply(req: Request): Promise<Response> {
 
 // Analytics partial — injected before </body> on every HTML page.
 // Edit partials/analytics.html to add or change tracking scripts.
+// NOTE: any new file source read here also needs adding to the Dockerfile COPY allowlist.
 const analyticsHtml = await Bun.file(
   new URL("./partials/analytics.html", import.meta.url).pathname
 ).text();
 
-async function loadPage(filename: string): Promise<string> {
+type CompressedPage = {
+  plain: string;
+  gzip: Uint8Array;
+};
+
+async function loadPage(filename: string): Promise<CompressedPage> {
   const html = await Bun.file(
     new URL(`./${filename}`, import.meta.url).pathname
   ).text();
-  return html.replace("</body>", `${analyticsHtml}\n</body>`);
+  const withAnalytics = html.replace("</body>", `${analyticsHtml}\n</body>`);
+  return {
+    plain: withAnalytics,
+    gzip: Bun.gzipSync(withAnalytics),
+  };
+}
+
+function htmlResponse(req: Request, page: CompressedPage): Response {
+  const acceptsGzip = req.headers.get("accept-encoding")?.includes("gzip") ?? false;
+  const baseHeaders: Record<string, string> = {
+    "Content-Type": "text/html; charset=utf-8",
+    "Cache-Control": "public, max-age=300",
+    "Vary": "Accept-Encoding",
+  };
+  if (acceptsGzip) {
+    return new Response(page.gzip, {
+      headers: { ...baseHeaders, "Content-Encoding": "gzip" },
+    });
+  }
+  return new Response(page.plain, { headers: baseHeaders });
 }
 
 const homepageHtml = await loadPage("homepage.html");
@@ -79,27 +104,19 @@ const server = Bun.serve({
     if (path === "/health") return new Response("ok");
 
     if (path === "/" && req.method === "GET") {
-      return new Response(homepageHtml, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
+      return htmlResponse(req, homepageHtml);
     }
 
     if (path === "/revenue-residency" && req.method === "GET") {
-      return new Response(revenueResidencyHtml, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
+      return htmlResponse(req, revenueResidencyHtml);
     }
 
     if (path === "/mid-market-tech" && req.method === "GET") {
-      return new Response(midMarketTechHtml, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
+      return htmlResponse(req, midMarketTechHtml);
     }
 
     if (path === "/studio-os" && req.method === "GET") {
-      return new Response(studioOsHtml, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
+      return htmlResponse(req, studioOsHtml);
     }
 
     if (path === "/headshot.jpg" && req.method === "GET") {
