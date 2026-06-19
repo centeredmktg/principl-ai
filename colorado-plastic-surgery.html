@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Footage as Infrastructure: A Proposal for Colorado Plastic Surgery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#6A7C5D;
+    --sage-deep:#53624a;
+    --charcoal:#1A1A1A;
+    --ink:#010101;
+    --cream:#EEEEE8;
+    --cream-2:#F4F4EF;
+    --gray-bg:#FAFAFA;
+    --line:#e2e2da;
+    --coral:#DC7474;
+    --maroon:#6B110B;
+    --muted:#757575;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    color:var(--charcoal);
+    background:var(--cream);
+    line-height:1.7;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+  .section{padding:84px 0;}
+  .section--tight{padding:56px 0;}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ink);letter-spacing:.3px;line-height:1.12;}
+  h1{font-size:clamp(40px,6vw,68px);font-weight:600;}
+  h2{font-size:clamp(30px,4.2vw,44px);margin-bottom:24px;}
+  h3{font-size:24px;margin-bottom:10px;}
+  p{margin-bottom:18px;font-size:17px;}
+  .lead{font-size:21px;line-height:1.6;color:#33352f;}
+  em{font-style:italic;}
+  strong{font-weight:600;color:var(--ink);}
+  a{color:var(--sage);}
+
+  .eyebrow{
+    font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:2.4px;
+    text-transform:uppercase;color:var(--sage);margin-bottom:22px;
+  }
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(160deg,#5e6f52 0%,var(--sage) 55%,#73855f 100%);
+    color:#fff;padding:120px 0 110px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    border-radius:50%;background:rgba(255,255,255,.06);
+  }
+  .hero-logo{width:350px;max-width:80%;height:auto;display:block;margin:0 auto 94px;opacity:.96;}
+  .hero .eyebrow{color:rgba(255,255,255,.82);}
+  .hero h1{color:#fff;max-width:18ch;}
+  .hero p{color:rgba(255,255,255,.9);font-size:20px;max-width:54ch;margin-top:24px;}
+  .hero .meta{
+    margin-top:46px;font-size:13px;letter-spacing:.5px;color:rgba(255,255,255,.78);
+    display:flex;gap:28px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.2);padding-top:24px;
+  }
+  .hero .meta b{color:#fff;font-weight:600;}
+
+  /* alternating bands */
+  .band-cream{background:var(--cream);}
+  .band-white{background:#fff;}
+  .band-soft{background:var(--cream-2);}
+
+  .kicker-rule{width:54px;height:3px;background:var(--coral);margin-bottom:28px;border-radius:2px;}
+
+  /* observation list */
+  .obs{display:grid;gap:2px;margin-top:30px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
+  .obs-row{display:grid;grid-template-columns:160px 1fr;gap:0;}
+  .obs-row>div{padding:18px 22px;border-bottom:1px solid var(--line);}
+  .obs-row:last-child>div{border-bottom:none;}
+  .obs-row .k{background:var(--cream-2);font-weight:600;font-size:13px;letter-spacing:.4px;color:var(--sage-deep);text-transform:uppercase;display:flex;align-items:center;}
+  .obs-row .v{font-size:16px;color:#333;}
+  @media(max-width:620px){.obs-row{grid-template-columns:1fr;}.obs-row .k{border-bottom:none;}}
+
+  /* pipeline */
+  .pipe{display:grid;gap:14px;margin-top:34px;counter-reset:step;}
+  .pipe-step{
+    display:grid;grid-template-columns:54px 1fr;gap:20px;align-items:start;
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--sage);
+    border-radius:10px;padding:22px 26px;
+  }
+  .pipe-step .num{
+    counter-increment:step;font-family:var(--serif);font-size:30px;font-weight:600;
+    color:var(--sage);line-height:1;
+  }
+  .pipe-step .num::before{content:counter(step);}
+  .pipe-step h3{margin-bottom:6px;font-size:21px;}
+  .pipe-step p{margin:0;font-size:15.5px;color:#444;}
+  .pipe-step .tag{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--sage);background:rgba(106,124,93,.1);padding:3px 9px;border-radius:20px;margin-top:10px;}
+
+  .parallel-note{
+    background:var(--charcoal);color:#fff;border-radius:12px;padding:34px 38px;margin-top:40px;
+  }
+  .parallel-note .eyebrow{color:var(--coral);}
+  .parallel-note h3{color:#fff;}
+  .parallel-note p{color:rgba(255,255,255,.85);margin-bottom:0;font-size:16px;}
+
+  /* feature cards */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px;}
+  @media(max-width:640px){.cards{grid-template-columns:1fr;}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px 30px 32px;}
+  .card .ic{font-family:var(--serif);font-size:26px;color:var(--coral);margin-bottom:8px;}
+  .card h3{font-size:21px;}
+  .card p{font-size:15.5px;color:#444;margin-bottom:0;}
+
+  /* phases */
+  .phase{background:#fff;border:1px solid var(--line);border-radius:12px;padding:34px 36px;margin-top:24px;position:relative;}
+  .phase .ph-tag{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:var(--sage);padding:5px 14px;border-radius:20px;display:inline-block;margin-bottom:16px;}
+  .phase.phase-2 .ph-tag{background:var(--sage-deep);}
+  .phase ul{list-style:none;margin-top:8px;}
+  .phase li{padding:8px 0 8px 28px;position:relative;font-size:16px;color:#3a3a3a;border-bottom:1px dashed var(--line);}
+  .phase li:last-child{border-bottom:none;}
+  .phase li::before{content:"";position:absolute;left:4px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--coral);}
+
+  /* questions */
+  .questions{background:linear-gradient(160deg,var(--cream-2),#fff);border:1px solid var(--line);border-radius:14px;padding:46px 44px;margin-top:30px;}
+  .q{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);}
+  .q:last-child{border-bottom:none;padding-bottom:0;}
+  .q .qn{font-family:var(--serif);font-size:42px;font-weight:600;color:var(--sage);line-height:.9;}
+  .q .qt{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--ink);line-height:1.3;}
+
+  /* partner callout */
+  .partner{background:var(--maroon);color:#fff;border-radius:14px;padding:44px 46px;}
+  .partner .eyebrow{color:#f0b9b9;}
+  .partner h2{color:#fff;}
+  .partner p{color:rgba(255,255,255,.9);}
+  .partner p:last-child{margin-bottom:0;}
+
+  /* CTA */
+  .cta{text-align:center;padding:90px 0 100px;background:var(--sage);color:#fff;}
+  .cta h2{color:#fff;}
+  .cta p{color:rgba(255,255,255,.9);max-width:48ch;margin:0 auto 30px;}
+  .btn{display:inline-block;background:#fff;color:var(--sage-deep);font-weight:600;font-size:15px;letter-spacing:.4px;padding:16px 38px;border-radius:40px;text-decoration:none;transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.55);text-align:center;padding:40px 0;font-size:13px;letter-spacing:.4px;}
+  footer b{color:rgba(255,255,255,.85);font-weight:600;}
+
+  .signal{color:var(--coral);font-style:italic;}
+
+  /* PRINCIPL BRIDGE */
+  .bridge{background:var(--cream-2);border-top:1px solid var(--line);padding:64px 0;text-align:center;}
+  .bridge .eyebrow{color:var(--muted);}
+  .bridge .pl-mark{font-family:var(--sans);font-weight:700;letter-spacing:.3px;font-size:17px;color:var(--charcoal);text-transform:lowercase;margin-bottom:6px;}
+  .bridge .pl-mark .dot{color:var(--coral);}
+  .bridge p{max-width:60ch;margin:12px auto 24px;font-size:16px;color:#444;}
+  .bridge a.pl-link{display:inline-block;font-weight:600;font-size:14px;letter-spacing:.4px;color:var(--sage-deep);text-decoration:none;border-bottom:2px solid var(--coral);padding-bottom:3px;}
+  .bridge a.pl-link:hover{color:var(--coral);}
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <img class="hero-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0QAAABjCAMAAACMhjAPAAAAAXNSR0IArs4c6QAAAUdQTFRFR3BM////////////////////////////////////////////////////////////////19fX////2NjY////0dHR2NjY////39/f19fX////2dnZ2NjY19fX2NjY1NTUv7+/2NjY2NjY19fX1dXV////2NjY3Nzc19fX2dnZ1NTU2NjY2NjY2NjY2tra0tLS19fX2tra2dnZ29vb2NjY2NjY2NjY29vb2dnZ2NjY19fX2dnZ2NjY2NjY2NjY2dnZ29vb////////19fX29vb3d3d2dnZ2NjY2dnZ2tra2tra2dnZ1tbW2tra19fX19fX2dnZ2dnZ29vb2NjY2NjY2NjY3t7e2dnZ2NjY19fX39/f1dXV19fX2dnZ2dnZ2dnZ2NjY2dnZ29vb2tra2NjY19fX3NzcgICA////2dnZ////////2NjYqZj5gQAAAG10Uk5TAJ/vEN9ggL8gQKBwMM+QUK/+f/QBC/mPCBMCn/dm7QYEwBrVMQTxHeiSJP1WdykRUkvHDvyLSDhsQrRyQZXTmStfsOoVJsOranuPNRlF22A94lyo3rwXsKXlID1Zf7eHy9lOguXROgJvzsD//yIfn9UAAA5LSURBVHja7Z1pQ9u4Foa924rjkJAQdspWtkJbaIFCC7TTfd/36Tr7JP//841lO7ETSbYckt7b+z5fhqktRzo6r5Yj2VIUAMCP5NJtZWLxDOwAQF5WFypP6s25F7AEAHmo3V5fa7ao3Pk0AWsAIM+Z32aalMvLMAYAeWZD05VmKKJrsAYAOWZDn5tt7sEcAEgz+UdHQ18ewR4ASM+H1tsSqrw7C3sAIM1upS2ipUmYAwBpNmbaGqqehzkAkOav6c6E6CXMAYA8l550RPQU5gBAnuVqW0Mnl2AOAOT5FR0RAP2x8SrS0Mzj1e0LMAgAsszvtHuiuZVp2AMAac5+7YznqoNYJiLuuGqNOJyruvCy7jiOzn90emIfUeb417OkTi2d9HNTCpxy3TEtyyLcnwzQWVeF9tVlKtuyTEdoaPbvZTE3zQ3z6YkiSj07bhLdSbE+n+9zwWaFSuXK6b8EoY9qjQDVkb+sFPwr6c+2i6zrVni14am8ujH9y4R/yccom3p6DkayWsQU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" alt="Colorado Plastic Surgery, Dr. Nick Slenkovich">
+      <div class="eyebrow">A proposal for Colorado Plastic Surgery</div>
+      <h1>Your footage is an asset that's stuck as a backlog.</h1>
+      <p>A system that turns hours of unbroken surgical and consult footage into a cut-ready Premiere
+         timeline, plus a searchable record of every case, before your editor has even finished loading the files.</p>
+      <div class="meta">
+        <span><b>Prepared for</b> &nbsp;Dr. Nick Slenkovich</span>
+        <span><b>From</b> &nbsp;Danny Cox · Principl</span>
+        <span><b>Date</b> &nbsp;June 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- WHAT I SEE -->
+  <section class="section band-cream">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">What I already see</div>
+      <h2>I looked at how you actually shoot.</h2>
+      <p class="lead">Before I pitch anything, I want to lay out my read on how you shoot, so you can see
+         this is built around your actual room rather than a generic tool hunting for a problem.</p>
+      <div class="obs">
+        <div class="obs-row"><div class="k">The OR</div><div class="v">Four cameras in the room plus a handheld iPhone, and the doctor wears two lav mics, one running into the computer and the other into the phone.</div></div>
+        <div class="obs-row"><div class="k">Consult rooms</div><div class="v">Two to three cameras, with the doctor's lav, the coordinator's lav, and a room mic each sitting on its own channel.</div></div>
+        <div class="obs-row"><div class="k">The sessions</div><div class="v">Long, unbroken streams that cover an entire procedure, sometimes running up to twenty hours of HD multicam.</div></div>
+        <div class="obs-row"><div class="k">The real bottleneck</div><div class="v">The slow part isn't your editor's skill, it's the time spent scrubbing footage to find the moments, and the render time on terabytes of HD before anyone can even begin.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE REFRAME -->
+  <section class="section band-white">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">The shift</div>
+      <h2>The audio already knows where the moments are.</h2>
+      <p class="lead">The doctor narrates the whole procedure, and that narration is really a map of every
+         cut-worthy moment in the footage, one we simply haven't been reading yet.</p>
+      <p>The thing that makes this work is that <strong>audio is a tiny fraction of the data.</strong> A
+         twenty-hour HD shoot runs to terabytes of video, but its audio is only a few hundred megabytes, so
+         we can pull that audio out in minutes without rendering, transcoding, or even opening Premiere, then
+         put the smart work to it while the heavy footage loads in the background.</p>
+      <div class="parallel-note">
+        <div class="eyebrow">Why this matters</div>
+        <h3>The thinking runs ahead of the rendering.</h3>
+        <p>By the time Premiere finishes chewing through the footage, the list of marked moments is
+           already sitting there waiting, so your editor's first touch on the timeline is cut-aware from
+           the start, with far less scrubbing and far less back-and-forth.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SYSTEM -->
+  <section class="section band-cream">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">The system</div>
+      <h2>How a moment becomes a marker.</h2>
+      <div class="pipe">
+        <div class="pipe-step"><div class="num"></div><div><h3>Pull and transcribe the audio</h3><p>We extract each audio channel and transcribe it with word-level timing, and because each mic sits on its own channel, we already know who's speaking by physics, since the doctor's lav <em>is</em> the doctor. That becomes your master transcript.</p><span class="tag">Runs locally · patient audio never leaves your environment</span></div></div>
+        <div class="pipe-step"><div class="num"></div><div><h3>Flag the moments worth cutting</h3><p>The system reads through the transcript and surfaces candidate moments, tagging each one for its audience, whether that's <em>consumer</em> (the hook, the story, the transformation) or <em>educational</em> (the technique, the teaching aside), and giving each a one-line reason.</p><span class="tag">Recommends · never auto-cuts</span></div></div>
+        <div class="pipe-step"><div class="num"></div><div><h3>You confirm what tells the story</h3><p>You review the flagged moments against the transcript, play the audio inline, and keep what's gold while dropping what isn't. The judgment stays yours, and the system simply handles the scrubbing for you.</p><span class="tag">You decide the story</span></div></div>
+        <div class="pipe-step"><div class="num"></div><div><h3>Markers land in Premiere</h3><p>Confirmed moments export straight onto the timeline as markers that are labeled, timed, and synced across every camera angle, including the handheld iPhone, so the editor opens a project that's already mapped.</p><span class="tag">Validated against Adobe's Premiere API</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO MORE THINGS -->
+  <section class="section band-white">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">Two details that make it yours</div>
+      <h2>Built for how a surgeon actually works.</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="ic">&#9678;</div>
+          <h3>A spoken shortcut: "mark that"</h3>
+          <p>Say a simple phrase during the procedure, something like "mark that," and the system
+             automatically flags that moment as highest priority. You get to pre-approve the moments you
+             know are gold right as they happen, without breaking your rhythm, while the system goes
+             looking for the ones you didn't call out.</p>
+        </div>
+        <div class="card">
+          <div class="ic">&#9636;</div>
+          <h3>Every case becomes searchable</h3>
+          <p>The same transcript that speeds up today's edit gets saved as a structured, searchable
+             record, so three years from now you can pull <em>every case where you discussed a given
+             technique</em>, whether that's for a book, a lecture, a teaching library, or a quick reference
+             before a similar procedure. The edit gets faster today, and the archive keeps compounding in
+             value as the library grows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="section--tight band-soft">
+    <div class="wrap">
+      <div class="eyebrow">A note on patient privacy</div>
+      <p class="lead" style="margin-bottom:0;">This is patient footage, so the system is designed
+         privacy-first, with transcription running <strong>on your own machine</strong> by default and
+         nothing shipped off to a third-party service. You've clearly handled releases for your existing
+         content already, so think of this as me showing you that the design respects that same line from
+         the very start.</p>
+    </div>
+  </section>
+
+  <!-- PHASES -->
+  <section class="section band-cream">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">How we'd build it</div>
+      <h2>Start where the footage is clean, then scale it into the room where the time savings are biggest.</h2>
+      <div class="phase phase-1">
+        <span class="ph-tag">Phase 1 · Prove the system</span>
+        <h3>The consult rooms</h3>
+        <ul>
+          <li>Cleaner, shorter footage with each speaker already on a separate channel</li>
+          <li>Stand up the full pipeline end-to-end: transcript → flagged moments → your review → Premiere markers</li>
+          <li>Build your moment criteria into the system so it learns what <em>you</em> consider cut-worthy</li>
+          <li>Every session saved to your searchable case archive</li>
+        </ul>
+      </div>
+      <div class="phase phase-2">
+        <span class="ph-tag">Phase 2 · Scale to the hard case</span>
+        <h3>The operating room</h3>
+        <ul>
+          <li>Sync the handheld iPhone to the four-camera rig automatically, using the doctor's voice as the anchor</li>
+          <li>Handle the 20-hour streams where the time savings are biggest</li>
+          <li>A second pass that reads across <em>all</em> the marked moments for the bigger story arc</li>
+          <li>"I'm cutting a 90-second rhinoplasty explainer" → moments flagged against that brief</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="section band-cream">
+    <div class="wrap">
+      <div class="kicker-rule"></div>
+      <div class="eyebrow">Where we start</div>
+      <h2>Three questions only you can answer.</h2>
+      <p class="lead">The system is only ever as good as its sense of what actually matters, and that sense
+         comes from you rather than from me guessing. Your answers to these three questions become the
+         engine that decides what gets flagged.</p>
+      <div class="questions">
+        <div class="q"><div class="qn">1</div><div class="qt">What makes a good moment, for you?</div></div>
+        <div class="q"><div class="qn">2</div><div class="qt">What stories do you want this footage to tell?</div></div>
+        <div class="q"><div class="qn">3</div><div class="qt">What should these videos do for the practice?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div class="eyebrow" style="color:rgba(255,255,255,.82);">The next step</div>
+      <h2>Let's spend thirty minutes on those three questions.</h2>
+      <p>That conversation is really where this starts, and once I hear your answers, I'll come back with
+         exactly what Phase 1 looks like for your room.</p>
+      <a class="btn" href="https://meetings.hubspot.com/danny482" target="_blank" rel="noopener">Start the conversation</a>
+    </div>
+  </section>
+
+  <!-- PRINCIPL BRIDGE -->
+  <section class="bridge">
+    <div class="wrap">
+      <div class="eyebrow">The bigger picture</div>
+      <div class="pl-mark">principl<span class="dot">.</span></div>
+      <p>Principl builds the operating systems that sit underneath businesses with real momentum but
+         no real system yet, and this proposal is one piece of that work. If you ever want to see the
+         rest of the practice, it's right here.</p>
+      <a class="pl-link" href="/">See the practice &rarr;</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      Prepared by <b>Danny Cox · Principl</b> &nbsp;·&nbsp; for Colorado Plastic Surgery &nbsp;·&nbsp; June 2026
+    </div>
+  </footer>
+
+</body>
+</html>

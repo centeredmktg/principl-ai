@@ -93,6 +93,7 @@ const homepageHtml = await loadPage("homepage.html");
 const revenueResidencyHtml = await loadPage("revenue-residency.html");
 const midMarketTechHtml = await loadPage("mid-market-tech.html");
 const studioOsHtml = await loadPage("studio-os.html");
+const coloradoPlasticSurgeryHtml = await loadPage("colorado-plastic-surgery.html");
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 8080),
@@ -117,6 +118,11 @@ const server = Bun.serve({
 
     if (path === "/studio-os" && req.method === "GET") {
       return htmlResponse(req, studioOsHtml);
+    }
+
+    // Unlisted — shared directly with the prospect, not in the public nav.
+    if (path === "/colorado-plastic-surgery" && req.method === "GET") {
+      return htmlResponse(req, coloradoPlasticSurgeryHtml);
     }
 
     if (path === "/headshot.jpg" && req.method === "GET") {
