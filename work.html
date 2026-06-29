@@ -580,6 +580,30 @@
       letter-spacing: var(--tk-caps); text-transform: uppercase;
       text-align: right;
     }
+
+    /* ---- /work proof page ---- */
+    .hero--work { padding-bottom: var(--s-8); }
+    .proof { padding-block: var(--s-8) var(--s-9); }
+    .proof-band { margin-top: var(--s-9); }
+    .proof-band:first-of-type { margin-top: var(--s-7); }
+    .proof-band__head { display: flex; align-items: baseline; gap: var(--s-4); flex-wrap: wrap; margin-bottom: var(--s-6); }
+    .proof-band__title { font-size: var(--t-h2); letter-spacing: var(--tk-h); font-weight: 500; margin: 0; }
+    .proof-band__note { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); text-transform: uppercase; color: var(--ink-50); }
+    .proof-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6); }
+    @media (max-width: 760px) { .proof-grid { grid-template-columns: 1fr; } }
+    .proof-card { border: 1px solid var(--rule-soft); background: var(--surface); border-radius: var(--r-2); overflow: hidden; display: flex; flex-direction: column; }
+    .proof-card__visual { aspect-ratio: 16 / 10; background: var(--blueprint-deep); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .proof-card__visual::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(244,239,227,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(244,239,227,0.06) 1px, transparent 1px); background-size: 28px 28px; }
+    .proof-card__viz-label { position: relative; z-index: 1; font-family: var(--font-mono); font-size: var(--t-small); letter-spacing: var(--tk-mono); text-transform: lowercase; color: var(--on-dark-muted); padding: 0 var(--s-5); text-align: center; }
+    .proof-card__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 2; }
+    .proof-card__body { padding: var(--s-6); }
+    .proof-card__title { font-size: 1.25rem; letter-spacing: var(--tk-h); font-weight: 500; margin: 0; }
+    .proof-card__meta { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tk-mono); text-transform: uppercase; color: var(--ink-50); margin: var(--s-2) 0 var(--s-5); }
+    .proof-card__lines { margin: 0; display: grid; gap: var(--s-4); }
+    .proof-card__lines > div { display: grid; grid-template-columns: 92px 1fr; gap: var(--s-4); align-items: start; }
+    .proof-card__lines dt { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tk-caps); text-transform: uppercase; color: var(--accent); margin: 0; padding-top: 2px; }
+    .proof-card__lines dd { margin: 0; font-size: var(--t-small); color: var(--ink-70); line-height: 1.5; }
+    @media (max-width: 460px) { .proof-card__lines > div { grid-template-columns: 1fr; gap: var(--s-1); } }
   </style>
 </head>
 <body>
@@ -605,7 +629,67 @@
 
   <section class="proof" id="proof">
     <div class="container">
-      <!-- BAND 1 inserted in Task 2 -->
+      <div class="proof-band">
+        <div class="proof-band__head">
+          <h2 class="proof-band__title">Built before anyone asked.</h2>
+          <span class="proof-band__note">— the engineer instinct</span>
+        </div>
+        <div class="proof-grid">
+
+          <article class="proof-card" data-video="">
+            <div class="proof-card__visual"><span class="proof-card__viz-label">automated loan pricing engine</span></div>
+            <div class="proof-card__body">
+              <h3 class="proof-card__title">Automated loan pricing engine</h3>
+              <p class="proof-card__meta">Built in a DSCR lending lab</p>
+              <dl class="proof-card__lines">
+                <div><dt>Challenge</dt><dd>A lender priced every deal by hand — analyst time, inconsistent terms, slow turnarounds.</dd></div>
+                <div><dt>System</dt><dd>Borrower intake flows into a pricing matrix that returns rate, terms, and a draft term sheet with no analyst in the loop.</dd></div>
+                <div><dt>Result</dt><dd>A ~10K-line production app pricing real deals. Built speculatively — now finding its buyer.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="proof-card" data-video="">
+            <div class="proof-card__visual"><span class="proof-card__viz-label">candidate marketing-site generator</span></div>
+            <div class="proof-card__body">
+              <h3 class="proof-card__title">Candidate marketing-site generator</h3>
+              <p class="proof-card__meta">You Should Hire</p>
+              <dl class="proof-card__lines">
+                <div><dt>Challenge</dt><dd>A strong candidate looks like one more PDF résumé in a stack.</dd></div>
+                <div><dt>System</dt><dd>Turns a candidate into a branded pitch site — company visuals, candidate voice, pain-first positioning.</dd></div>
+                <div><dt>Result</dt><dd>First candidate live. [CONFIRM: name or keep generic]</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="proof-card" data-video="">
+            <div class="proof-card__visual"><span class="proof-card__viz-label">transcript-to-edit highlight engine</span></div>
+            <div class="proof-card__body">
+              <h3 class="proof-card__title">Transcript-to-edit highlight engine</h3>
+              <p class="proof-card__meta">Premiere pipeline</p>
+              <dl class="proof-card__lines">
+                <div><dt>Challenge</dt><dd>Hours of multicam footage, manual hunt for the moments worth keeping.</dd></div>
+                <div><dt>System</dt><dd>Transcribes the call, detects highlight moments, exports markers straight into the Premiere timeline.</dd></div>
+                <div><dt>Result</dt><dd>First-pass edit hunt cut from hours to [CONFIRM: minutes].</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="proof-card" data-video="">
+            <div class="proof-card__visual"><span class="proof-card__viz-label">multi-exec publishing pipeline</span></div>
+            <div class="proof-card__body">
+              <h3 class="proof-card__title">Multi-exec LinkedIn pipeline, approved in Slack</h3>
+              <p class="proof-card__meta">Exec content engine</p>
+              <dl class="proof-card__lines">
+                <div><dt>Challenge</dt><dd>Execs want a presence but won't touch a CMS.</dd></div>
+                <div><dt>System</dt><dd>Drafts run through Slack for one-tap review and approval, then publish — multi-tenant across execs.</dd></div>
+                <div><dt>Result</dt><dd>POC live, first post published.</dd></div>
+              </dl>
+            </div>
+          </article>
+
+        </div>
+      </div>
       <!-- BAND 2 + close inserted in Task 3 -->
     </div>
   </section>
