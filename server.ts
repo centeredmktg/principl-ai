@@ -93,6 +93,7 @@ const homepageHtml = await loadPage("homepage.html");
 const revenueResidencyHtml = await loadPage("revenue-residency.html");
 const midMarketTechHtml = await loadPage("mid-market-tech.html");
 const studioOsHtml = await loadPage("studio-os.html");
+const workHtml = await loadPage("work.html");
 const coloradoPlasticSurgeryHtml = await loadPage("colorado-plastic-surgery.html");
 
 const server = Bun.serve({
@@ -118,6 +119,10 @@ const server = Bun.serve({
 
     if (path === "/studio-os" && req.method === "GET") {
       return htmlResponse(req, studioOsHtml);
+    }
+
+    if (path === "/work" && req.method === "GET") {
+      return htmlResponse(req, workHtml);
     }
 
     // Unlisted — shared directly with the prospect, not in the public nav.
