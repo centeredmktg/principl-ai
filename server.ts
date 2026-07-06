@@ -142,6 +142,21 @@ const server = Bun.serve({
       });
     }
 
+    // Case-study surface screenshots. Strict allowlist on the filename
+    // (lowercase, digits, hyphens only) so there's no path traversal.
+    if (path.startsWith("/assets/work/") && req.method === "GET") {
+      const name = path.slice("/assets/work/".length);
+      if (/^[a-z0-9-]+\.jpg$/.test(name)) {
+        const file = Bun.file(new URL(`./assets/work/${name}`, import.meta.url).pathname);
+        if (await file.exists()) {
+          return new Response(file, {
+            headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=86400" },
+          });
+        }
+      }
+      return new Response("Not found", { status: 404 });
+    }
+
     if (path === "/apply" && req.method === "POST") {
       return handleApply(req);
     }
