@@ -606,6 +606,61 @@
     .proof-card__lines dt { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tk-caps); text-transform: uppercase; color: var(--accent); margin: 0; padding-top: 2px; }
     .proof-card__lines dd { margin: 0; font-size: var(--t-small); color: var(--ink-70); line-height: 1.5; }
     @media (max-width: 460px) { .proof-card__lines > div { grid-template-columns: 1fr; gap: var(--s-1); } }
+
+    /* ---- /work case studies (deep dives) ---- */
+    .cases { padding-block: var(--s-9); border-top: 1px solid var(--rule-hair); }
+    .cases__head { max-width: 62ch; margin-bottom: var(--s-8); }
+    .cases__head h2 { font-size: var(--t-h2); line-height: 1.06; letter-spacing: var(--tk-h); font-weight: 500; margin: var(--s-5) 0 0; max-width: 22ch; }
+    .cases__head h2 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+    .cases__head p { font-size: var(--t-lead); line-height: 1.5; color: var(--ink-70); margin: var(--s-5) 0 0; text-wrap: pretty; }
+
+    .case-list { display: grid; gap: var(--s-8); }
+    .case {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--s-7); align-items: center;
+      padding-top: var(--s-8); border-top: 1px solid var(--rule-hair);
+    }
+    .case:first-child { padding-top: 0; border-top: 0; }
+    @media (max-width: 860px) { .case { grid-template-columns: 1fr; gap: var(--s-6); } }
+
+    .case__visual {
+      aspect-ratio: 16 / 10; background: var(--blueprint-deep);
+      position: relative; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-radius: var(--r-2); border: 1px solid var(--rule-soft);
+    }
+    .case__visual::after {
+      content: ""; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(244,239,227,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(244,239,227,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .case__viz-label {
+      position: relative; z-index: 1; font-family: var(--font-mono);
+      font-size: var(--t-small); letter-spacing: var(--tk-mono);
+      text-transform: lowercase; color: var(--on-dark-muted);
+      padding: 0 var(--s-6); text-align: center;
+    }
+    .case__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 2; }
+    .case:nth-child(even) .case__visual { order: 2; }
+    @media (max-width: 860px) { .case:nth-child(even) .case__visual { order: 0; } }
+
+    .case__meta { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tk-caps); text-transform: uppercase; color: var(--ink-50); margin: 0 0 var(--s-3); }
+    .case__meta strong { color: var(--accent); font-weight: 500; }
+    .case__title { font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.14; letter-spacing: var(--tk-h); font-weight: 500; margin: 0; text-wrap: balance; }
+    .case__situation { margin: var(--s-3) 0 0; font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--tk-mono); color: var(--ink-50); }
+    .case__diagnosis {
+      margin: var(--s-5) 0 0; padding-top: var(--s-5);
+      border-top: 2px solid var(--ink);
+      font-size: clamp(1.1875rem, 1.8vw, 1.4375rem); line-height: 1.3;
+      letter-spacing: var(--tk-h); font-weight: 500; color: var(--ink); text-wrap: pretty;
+    }
+    .case__diagnosis em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+    .case__parts { margin: var(--s-6) 0 0; display: grid; gap: var(--s-4); }
+    .case__part { display: grid; grid-template-columns: 108px 1fr; gap: var(--s-4); align-items: start; }
+    .case__part dt { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: var(--tk-caps); text-transform: uppercase; color: var(--accent); margin: 0; padding-top: 3px; }
+    .case__part dd { margin: 0; font-size: var(--t-small); line-height: 1.55; color: var(--ink-70); }
+    .case__part dd strong { color: var(--ink); font-weight: 500; }
+    .case__part dd a { color: var(--blueprint); border-bottom-color: var(--rule-hair); }
+    @media (max-width: 460px) { .case__part { grid-template-columns: 1fr; gap: var(--s-1); } }
   </style>
 </head>
 <body>
@@ -655,7 +710,7 @@
             <div class="proof-card__visual"><span class="proof-card__viz-label">candidate marketing-site generator</span></div>
             <div class="proof-card__body">
               <h3 class="proof-card__title">Candidate marketing-site generator</h3>
-              <p class="proof-card__meta">You Should Hire</p>
+              <p class="proof-card__meta">Hiremé</p>
               <dl class="proof-card__lines">
                 <div><dt>Challenge</dt><dd>A strong candidate looks like one more PDF résumé in a stack.</dd></div>
                 <div><dt>System</dt><dd>Turns a candidate into a branded pitch site — company visuals, candidate voice, pain-first positioning.</dd></div>
@@ -703,7 +758,7 @@
             <div class="proof-card__visual"><span class="proof-card__viz-label">icp-matched pipeline + message generator</span></div>
             <div class="proof-card__body">
               <h3 class="proof-card__title">ICP-matched pipeline + per-account message generator</h3>
-              <p class="proof-card__meta">For a B2B agency client</p>
+              <p class="proof-card__meta">Sixth City Marketing</p>
               <dl class="proof-card__lines">
                 <div><dt>Challenge</dt><dd>Generic outbound to a vague audience.</dd></div>
                 <div><dt>System</dt><dd>Scores accounts against a defined ICP, then generates a unique value-prop message per account from that account's own signals.</dd></div>
@@ -720,7 +775,7 @@
               <dl class="proof-card__lines">
                 <div><dt>Challenge</dt><dd>A show audience with no real commerce engine behind it.</dd></div>
                 <div><dt>System</dt><dd>Shopify storefront reskin, a WordPress content engine, and a YouTube-to-product pipeline.</dd></div>
-                <div><dt>Result</dt><dd>Live store on a $1.2M YouTube business.</dd></div>
+                <div><dt>Result</dt><dd>Third-highest sales month in store history — in the first week live.</dd></div>
               </dl>
             </div>
           </article>
@@ -731,10 +786,100 @@
     </div>
   </section>
 
+  <section class="cases" id="cases">
+    <div class="container">
+      <span class="eyebrow"><span class="eyebrow__num">§ 02 /</span> Case studies</span>
+      <div class="cases__head">
+        <h2>Four, told in full. <em>The gap each one was really closing.</em></h2>
+        <p>Enough of each build to see what it does and what it changed. The method that makes them repeatable stays off the page — that part comes with the work.</p>
+      </div>
+      <div class="case-list">
+
+        <!-- CASE 1 · GTM-OS / Ridgeline — net-new, not in the index above -->
+        <article class="case">
+          <div class="case__visual">
+            <span class="case__viz-label">go-to-market intelligence + asset production</span>
+            <!-- Employer (Ridgeline) tooling — surface shown with all TAM/AUM figures blurred out. -->
+            <img src="/assets/work/gtm-os.jpg" alt="GTM-OS prospect-intelligence dashboard, figures redacted" loading="lazy" />
+          </div>
+          <div class="case__body">
+            <p class="case__meta"><strong>GTM-OS</strong> · Built inside Ridgeline</p>
+            <h3 class="case__title">Go-to-market intelligence that produces the asset, not just the insight.</h3>
+            <p class="case__situation">Growth-stage B2B software · customer marketing, 500-plus-person org</p>
+            <p class="case__diagnosis">The signal to act on a customer lived in one set of tools; the assets that act on it got made somewhere else, by hand. <em>Between the insight and the finished piece sat days of copy-paste.</em></p>
+            <dl class="case__parts">
+              <div class="case__part"><dt>What I built</dt><dd>An engine that reads the account and produces the asset in the same motion. Feed it the context, get back a finished draft that already sounds like the company — meeting brief, case study, one-pager, sequence, whatever the moment needs. Using it feels less like briefing an agency and more like the research and the writing happening at once.</dd></div>
+              <div class="case__part"><dt>The result</dt><dd><strong>Meeting prep went from ~4 hours to ~15 minutes.</strong> Running inside the marketing org today — a morning of research turned into a finished, on-voice brief.</dd></div>
+              <div class="case__part"><dt>For you</dt><dd>If your team researches in one tool and writes in another, the gap between them is where the speed goes. This closes it — a marketing function that ships as fast as it thinks.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- CASE 2 · Sixth City Marketing — likely the named version of index tile #5 ("a B2B agency client") -->
+        <article class="case">
+          <div class="case__visual">
+            <span class="case__viz-label">agency revenue engine</span>
+            <img src="/assets/work/sixth-city.jpg" alt="Sixth City ingestion-engine console" loading="lazy" />
+          </div>
+          <div class="case__body">
+            <p class="case__meta"><strong>Sixth City Marketing</strong> · Full revenue engine</p>
+            <h3 class="case__title">The agency that sold systems and ran on none.</h3>
+            <p class="case__situation">Marketing agency · founder-led</p>
+            <p class="case__diagnosis">Leads came from the founder's network and referrals, which capped growth at how many rooms one person could be in. <em>Momentum, not a system.</em></p>
+            <dl class="case__parts">
+              <div class="case__part"><dt>What I built</dt><dd>A revenue engine that runs the agency's own pipeline end to end — signal in, scored accounts out, a per-account message that reads like it was written for exactly that prospect, and a follow-through that doesn't depend on the founder remembering. It feels like the agency finally hired the operator it kept selling everyone else.</dd></div>
+              <div class="case__part"><dt>The result</dt><dd><strong>3,500-plus net-new accounts</strong> identified and scored against the company's ICP, each one handed a value point up front — which turns what used to be an inbound signal into an outbound door-opener, at scale and without the founder in the loop.</dd></div>
+              <div class="case__part"><dt>For you</dt><dd>If your growth is capped by one person's calendar, the fix isn't more hustle. It's a system that runs when that person is asleep.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- CASE 3 · Rich Eisen Show — deep version of index tile #6 -->
+        <article class="case">
+          <div class="case__visual">
+            <span class="case__viz-label">content engine + merch funnel</span>
+            <img src="/assets/work/rich-eisen.jpg" alt="The Rich Eisen Show editorial storefront" loading="lazy" />
+          </div>
+          <div class="case__body">
+            <p class="case__meta"><strong>The Rich Eisen Show</strong> · JV with element23</p>
+            <h3 class="case__title">A national audience, and a store it kept ignoring.</h3>
+            <p class="case__situation">National sports-media brand · large daily audience</p>
+            <p class="case__diagnosis">The attention was already there and already paying attention. The store sat off to the side like an afterthought, so a huge daily audience and the thing you could actually buy lived on separate islands. <em>No bridge between them.</em></p>
+            <dl class="case__parts">
+              <div class="case__part"><dt>What I built</dt><dd>A content engine and a storefront that finally point at each other. The show's content routes people to product, the store looks like it belongs to the brand instead of a generic template, and new episodes feed the funnel instead of disappearing into the feed. It feels like the merch line finally joined the show it's named after.</dd></div>
+              <div class="case__part"><dt>The result</dt><dd><strong>The third-highest sales month in the store's history — inside the first week of go-live.</strong> A national audience finally had somewhere to convert.</dd></div>
+              <div class="case__part"><dt>For you</dt><dd>If you have an audience and a store that ignore each other, the money is in the bridge, not in more audience.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- CASE 4 · Hiremé — own product, fully showable; deep version of index tile #2 ("You Should Hire") -->
+        <article class="case">
+          <div class="case__visual">
+            <span class="case__viz-label">candidate marketing-site platform</span>
+            <img src="/assets/work/hireme.jpg" alt="Hiremé candidate marketing-site product" loading="lazy" />
+          </div>
+          <div class="case__body">
+            <p class="case__meta"><strong>Hiremé</strong> · My own product · <a href="https://youshouldhire.org">youshouldhire.org</a></p>
+            <h3 class="case__title">The résumé hides the person. This argues for the hire.</h3>
+            <p class="case__situation">Job-seeker platform · shipped product</p>
+            <p class="case__diagnosis">A strong candidate lands in the stack as one more PDF, and everything that actually makes them worth hiring — the proof, the voice, the fit — gets flattened into the same template as everyone else. <em>The format hides the signal.</em></p>
+            <dl class="case__parts">
+              <div class="case__part"><dt>What I built</dt><dd>A full-stack platform that turns a candidate into their own marketing site — the company's visual language, the candidate's voice, positioned against the exact pain the role is trying to solve. Instead of a PDF that begs to be skimmed, it's a page that argues for the hire. Using it feels less like updating a résumé and more like a campaign built around one person.</dd></div>
+              <div class="case__part"><dt>The result</dt><dd><strong>Concept to functioning product in 72 hours.</strong> A live platform you can click through right now at <a href="https://youshouldhire.org">youshouldhire.org</a> — where the alternative was one more PDF résumé.</dd></div>
+              <div class="case__part"><dt>For you</dt><dd>Proof this isn't slideware. It's live, it has users, and the surface is yours to inspect before a single call.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <section class="cta" id="cta">
     <div class="cta__grid"></div>
     <div class="container">
-      <span class="eyebrow" style="color: var(--on-dark-muted);"><span class="eyebrow__num" style="color: var(--accent);">§ 02 /</span> How to start</span>
+      <span class="eyebrow" style="color: var(--on-dark-muted);"><span class="eyebrow__num" style="color: var(--accent);">§ 03 /</span> How to start</span>
       <h2 class="cta__head" style="margin-top: var(--s-5);">Have a problem in front of you? <em>Let's build for it.</em></h2>
       <p class="cta__lede">The work I want more of is the second kind — someone brings the problem, we build the system. A 30-minute intro tells us if there's a fit.</p>
       <div class="cta__row">
