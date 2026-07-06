@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { initDb, upsertApplication, type Application } from "./db.ts";
 import { notifyNewApplication } from "./notify.ts";
 
@@ -63,14 +64,42 @@ type CompressedPage = {
   gzip: Uint8Array;
 };
 
+// Content-hash /assets/work/*.jpg references at boot so a swapped screenshot
+// busts caches automatically: the URL changes when (and only when) the bytes do.
+// Files stay named "<base>.jpg" on disk; the served URL becomes "<base>.<hash>.jpg".
+const assetHashCache = new Map<string, string>();
+async function assetHash(base: string): Promise<string | null> {
+  const cached = assetHashCache.get(base);
+  if (cached) return cached;
+  const file = Bun.file(new URL(`./assets/work/${base}.jpg`, import.meta.url).pathname);
+  if (!(await file.exists())) return null;
+  const hash = createHash("sha256")
+    .update(Buffer.from(await file.arrayBuffer()))
+    .digest("hex")
+    .slice(0, 8);
+  assetHashCache.set(base, hash);
+  return hash;
+}
+
+async function hashAssetRefs(html: string): Promise<string> {
+  const bases = new Set<string>();
+  for (const m of html.matchAll(/\/assets\/work\/([a-z0-9-]+)\.jpg/g)) bases.add(m[1]);
+  for (const base of bases) {
+    const h = await assetHash(base);
+    if (h) html = html.replaceAll(`/assets/work/${base}.jpg`, `/assets/work/${base}.${h}.jpg`);
+  }
+  return html;
+}
+
 async function loadPage(filename: string): Promise<CompressedPage> {
   const html = await Bun.file(
     new URL(`./${filename}`, import.meta.url).pathname
   ).text();
   const withAnalytics = html.replace("</body>", `${analyticsHtml}\n</body>`);
+  const withHashedAssets = await hashAssetRefs(withAnalytics);
   return {
-    plain: withAnalytics,
-    gzip: Bun.gzipSync(withAnalytics),
+    plain: withHashedAssets,
+    gzip: Bun.gzipSync(withHashedAssets),
   };
 }
 
@@ -142,15 +171,21 @@ const server = Bun.serve({
       });
     }
 
-    // Case-study surface screenshots. Strict allowlist on the filename
-    // (lowercase, digits, hyphens only) so there's no path traversal.
+    // Case-study surface screenshots. Accept a bare "<base>.jpg" or a
+    // content-hashed "<base>.<hash>.jpg"; both map to <base>.jpg on disk.
+    // The base is [a-z0-9-]+ (no dots/slashes) so there's no path traversal.
+    // Hashed URLs are immutable-cacheable; bare URLs get a short TTL.
     if (path.startsWith("/assets/work/") && req.method === "GET") {
       const name = path.slice("/assets/work/".length);
-      if (/^[a-z0-9-]+\.jpg$/.test(name)) {
-        const file = Bun.file(new URL(`./assets/work/${name}`, import.meta.url).pathname);
+      const m = name.match(/^([a-z0-9-]+)(\.[a-f0-9]{8})?\.jpg$/);
+      if (m) {
+        const file = Bun.file(new URL(`./assets/work/${m[1]}.jpg`, import.meta.url).pathname);
         if (await file.exists()) {
+          const cache = m[2]
+            ? "public, max-age=31536000, immutable"
+            : "public, max-age=86400";
           return new Response(file, {
-            headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=86400" },
+            headers: { "Content-Type": "image/jpeg", "Cache-Control": cache },
           });
         }
       }
